@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "rgeomex: Geographic boundaries of Mexico for Python"
+version: 0.1.0
+date-released: 2026-11-19
+license: MIT
+repository-code: "https://github.com/fdzul/rgeomex-py"
+url: "https://fdzul.github.io/rgeomex-py/"
+keywords:
+  - Mexico
+  - INEGI
+  - INE
+  - geospatial
+  - GeoParquet
+  - dengue
+authors:
+  - family-names: "Dzul Manzanilla"
+    given-names: "Felipe Antonio"
+    email: "felipe.dzul.m@gmail.com"
+    affiliation: "Instituto Nacional de Salud Pública (INSP), Mexico"
+    orcid: "https://orcid.org/0000-0002-2085-9141"
+  - family-names: "Morales García"
+    given-names: "Emmanuel"
+    email: "emmorales@uv.mx"
+    orcid: "https://orcid.org/0000-0002-6837-9227"

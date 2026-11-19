@@ -25,8 +25,13 @@ theme:
 
 nav:
   - Home: index.md
+  - Examples: examples.md
+  - Getting Started: getting-started.md
   - Datasets: datasets.md
   - Reference: reference.md
+  - Citation: citation.md
+  - Changelog: changelog.md
+  - License: license.md
   - Español: es.md
 
 plugins:
