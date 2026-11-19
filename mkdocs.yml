@@ -20,18 +20,24 @@ theme:
         icon: material/weather-sunny
         name: Light mode
   features:
+    - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
+    - navigation.indexes
+    - navigation.top
     - content.code.copy
 
 nav:
   - Home: index.md
-  - Examples: examples.md
-  - Getting Started: getting-started.md
-  - Datasets: datasets.md
+  - Guide:
+      - Getting Started: getting-started.md
+      - Examples: examples.md
+      - Datasets: datasets.md
   - Reference: reference.md
-  - Citation: citation.md
-  - Changelog: changelog.md
-  - License: license.md
+  - About:
+      - Citation: citation.md
+      - Changelog: changelog.md
+      - License: license.md
   - Español: es.md
 
 plugins:
