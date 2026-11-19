@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "rgeomex"
+version = "0.1.0"
+description = "Geographic boundaries of Mexico (INEGI, INE): states, municipalities, localities, AGEB, blocks and electoral sections, downloaded on demand."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [
+    { name = "Felipe Antonio Dzul Manzanilla", email = "felipe.dzul.m@gmail.com" },
+]
+keywords = ["mexico", "inegi", "ine", "geospatial", "geoparquet", "dengue"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: GIS",
+]
+dependencies = [
+    "geopandas>=1.0",
+    "pyarrow>=14",
+    "pooch>=1.8",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.urls]
+Homepage = "https://github.com/fdzul/rgeomex-py"
+Source = "https://github.com/fdzul/rgeomex-py"
+Issues = "https://github.com/fdzul/rgeomex-py/issues"
+"R package" = "https://github.com/fdzul/rgeomex"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rgeomex"]
+
+[tool.hatch.build.targets.sdist]
+exclude = ["data-raw/rgeomex_export", "data-raw/release", ".venv"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
