@@ -1,4 +1,4 @@
-# rgeomex
+# rgeomex <img src="docs/assets/logo.png" align="right" height="139" alt="" />
 
 **English** | [Español](#español)
 

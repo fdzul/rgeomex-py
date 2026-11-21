@@ -1,4 +1,4 @@
-# rgeomex
+# rgeomex <img src="assets/logo.png" align="right" height="139" alt="" />
 
 **Geographic boundaries of Mexico for Python**: states, municipalities,
 localities, AGEB, blocks (*manzanas*) and electoral sections, from INEGI and
