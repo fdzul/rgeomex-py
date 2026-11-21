@@ -1,4 +1,4 @@
-# rgeomex <img src="assets/logo.png" align="right" height="139" alt="" />
+# rgeomex <img src="assets/logo.png" align="right" width="130" style="width:130px" alt="" />
 
 Geographic boundaries of Mexico (states, municipalities, localities, AGEB, blocks and electoral sections) from INEGI 2019 and INE 2020, and functions to extract the AGEB, blocks and electoral sections of a locality. It is the Python version of the R package
 [rgeomex](https://github.com/fdzul/rgeomex), part of the
