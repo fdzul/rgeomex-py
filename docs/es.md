@@ -1,7 +1,6 @@
 # rgeomex en español
 
-Límites geográficos de México para Python: estados, municipios, localidades,
-AGEB, manzanas y secciones electorales del INEGI y del INE. Es la versión en
+Límites geográficos de México (estados, municipios, localidades, AGEB, manzanas y secciones electorales) del INEGI 2019 y el INE 2020, y funciones para extraer las AGEB, manzanas y secciones electorales de una localidad. Es la versión en
 Python del paquete de R [rgeomex](https://github.com/fdzul/rgeomex), parte del
 [dengueverse](https://fdzul.r-universe.dev).
 

@@ -2,8 +2,7 @@
 
 **English** | [Español](#español)
 
-Geographic boundaries of Mexico for Python: states, municipalities, localities,
-AGEB, blocks (*manzanas*) and electoral sections, from INEGI and INE. It is the
+Geographic boundaries of Mexico (states, municipalities, localities, AGEB, blocks and electoral sections) from INEGI 2019 and INE 2020, and functions to extract the AGEB, blocks and electoral sections of a locality. It is the
 Python version of the R package [rgeomex](https://github.com/fdzul/rgeomex),
 part of the [dengueverse](https://fdzul.github.io/dengueverse/).
 
@@ -74,8 +73,7 @@ MIT.
 
 ## Español
 
-Límites geográficos de México para Python: estados, municipios, localidades,
-AGEB, manzanas y secciones electorales del INEGI y del INE. Es la versión en
+Límites geográficos de México (estados, municipios, localidades, AGEB, manzanas y secciones electorales) del INEGI 2019 y el INE 2020, y funciones para extraer las AGEB, manzanas y secciones electorales de una localidad. Es la versión en
 Python del paquete de R [rgeomex](https://github.com/fdzul/rgeomex).
 
 Los datos se **descargan bajo demanda**: la primera vez que se usa un conjunto

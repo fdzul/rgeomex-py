@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "rgeomex"
 version = "0.1.0"
-description = "Geographic boundaries of Mexico (INEGI, INE): states, municipalities, localities, AGEB, blocks and electoral sections, downloaded on demand."
+description = "Geographic boundaries of Mexico (states, municipalities, localities, AGEB, blocks and electoral sections) from INEGI 2019 and INE 2020, and functions to extract the AGEB, blocks and electoral sections of a locality."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]

@@ -1,5 +1,5 @@
 site_name: rgeomex
-site_description: Geographic boundaries of Mexico (INEGI, INE) for Python, downloaded on demand
+site_description: Geographic boundaries of Mexico (states, municipalities, localities, AGEB, blocks and electoral sections) from INEGI 2019 and INE 2020, and functions to extract the AGEB, blocks and electoral sections of a locality.
 site_url: https://fdzul.github.io/rgeomex-py/
 repo_url: https://github.com/fdzul/rgeomex-py
 repo_name: fdzul/rgeomex-py
