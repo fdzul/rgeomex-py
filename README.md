@@ -5,7 +5,7 @@
 Geographic boundaries of Mexico for Python: states, municipalities, localities,
 AGEB, blocks (*manzanas*) and electoral sections, from INEGI and INE. It is the
 Python version of the R package [rgeomex](https://github.com/fdzul/rgeomex),
-part of the [dengueverse](https://fdzul.r-universe.dev).
+part of the [dengueverse](https://fdzul.github.io/dengueverse/).
 
 The data are **downloaded on demand**: the first time a dataset is used it is
 downloaded from the [GitHub release](https://github.com/fdzul/rgeomex-py/releases),
