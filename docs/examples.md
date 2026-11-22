@@ -71,3 +71,21 @@ out = rgeomex.extract_blocks(locality="Merida", cve_edo="31")
 out["block"].to_file("merida_blocks.gpkg")       # GeoPackage (QGIS, R)
 out["block"].to_file("merida_blocks.shp")        # shapefile
 ```
+
+## 7. Several localities: a metropolitan area
+
+`locality` accepts one name or a list of names. With a list, the
+functions return all the localities, and the AGEB, blocks or sections that
+intersect any of them:
+
+```python
+import rgeomex
+
+amg = ["Guadalajara", "Zapopan", "Tonalá", "Tlaquepaque"]
+
+loc = rgeomex.extract_locality(cve_edo="14", locality=amg)
+loc[["CVEGEO", "NOMGEO"]]
+
+out = rgeomex.extract_ageb(locality=amg, cve_edo="14")
+len(out["ageb"])
+```
