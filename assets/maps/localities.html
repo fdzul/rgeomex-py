@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_5af264a0150368ee87a38bff23e5bae6 {
+                    position: relative;
+                    width: 100.0vw;
+                    height: 100.0vh;
+
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>/*
+ * Glyphicons Halflings -- the icon font used by folium's default Awesome Markers
+ * (Icon(prefix="glyphicon")). Extracted from Bootstrap 3's glyphicon rules only.
+ *
+ * folium previously loaded netdna's bootstrap-glyphicons.css, which despite its
+ * name ships a full Bootstrap-3 base stylesheet (normalize reset + global `body`
+ * rules) that leaked onto the host page (GH-1820). This file provides just the
+ * @font-face and .glyphicon/.glyphicon-* rules needed for the markers, with no
+ * page-wide side effects. Font files are served from jsDelivr.
+ */
+@font-face{font-family:'Glyphicons Halflings';src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot');src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.woff') format('woff'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');}.glyphicon{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:normal;line-height:1;-webkit-font-smoothing:antialiased;}
+.glyphicon-asterisk:before{content:"\2a";}
+.glyphicon-plus:before{content:"\2b";}
+.glyphicon-euro:before{content:"\20ac";}
+.glyphicon-minus:before{content:"\2212";}
+.glyphicon-cloud:before{content:"\2601";}
+.glyphicon-envelope:before{content:"\2709";}
+.glyphicon-pencil:before{content:"\270f";}
+.glyphicon-glass:before{content:"\e001";}
+.glyphicon-music:before{content:"\e002";}
+.glyphicon-search:before{content:"\e003";}
+.glyphicon-heart:before{content:"\e005";}
+.glyphicon-star:before{content:"\e006";}
+.glyphicon-star-empty:before{content:"\e007";}
+.glyphicon-user:before{content:"\e008";}
+.glyphicon-film:before{content:"\e009";}
+.glyphicon-th-large:before{content:"\e010";}
+.glyphicon-th:before{content:"\e011";}
+.glyphicon-th-list:before{content:"\e012";}
+.glyphicon-ok:before{content:"\e013";}
+.glyphicon-remove:before{content:"\e014";}
+.glyphicon-zoom-in:before{content:"\e015";}
+.glyphicon-zoom-out:before{content:"\e016";}
+.glyphicon-off:before{content:"\e017";}
+.glyphicon-signal:before{content:"\e018";}
+.glyphicon-cog:before{content:"\e019";}
+.glyphicon-trash:before{content:"\e020";}
+.glyphicon-home:before{content:"\e021";}
+.glyphicon-file:before{content:"\e022";}
+.glyphicon-time:before{content:"\e023";}
+.glyphicon-road:before{content:"\e024";}
+.glyphicon-download-alt:before{content:"\e025";}
+.glyphicon-download:before{content:"\e026";}
+.glyphicon-upload:before{content:"\e027";}
+.glyphicon-inbox:before{content:"\e028";}
+.glyphicon-play-circle:before{content:"\e029";}
+.glyphicon-repeat:before{content:"\e030";}
+.glyphicon-refresh:before{content:"\e031";}
+.glyphicon-list-alt:before{content:"\e032";}
+.glyphicon-flag:before{content:"\e034";}
+.glyphicon-headphones:before{content:"\e035";}
+.glyphicon-volume-off:before{content:"\e036";}
+.glyphicon-volume-down:before{content:"\e037";}
+.glyphicon-volume-up:before{content:"\e038";}
+.glyphicon-qrcode:before{content:"\e039";}
+.glyphicon-barcode:before{content:"\e040";}
+.glyphicon-tag:before{content:"\e041";}
+.glyphicon-tags:before{content:"\e042";}
+.glyphicon-book:before{content:"\e043";}
+.glyphicon-print:before{content:"\e045";}
+.glyphicon-font:before{content:"\e047";}
+.glyphicon-bold:before{content:"\e048";}
+.glyphicon-italic:before{content:"\e049";}
+.glyphicon-text-height:before{content:"\e050";}
+.glyphicon-text-width:before{content:"\e051";}
+.glyphicon-align-left:before{content:"\e052";}
+.glyphicon-align-center:before{content:"\e053";}
+.glyphicon-align-right:before{content:"\e054";}
+.glyphicon-align-justify:before{content:"\e055";}
+.glyphicon-list:before{content:"\e056";}
+.glyphicon-indent-left:before{content:"\e057";}
+.glyphicon-indent-right:before{content:"\e058";}
+.glyphicon-facetime-video:before{content:"\e059";}
+.glyphicon-picture:before{content:"\e060";}
+.glyphicon-map-marker:before{content:"\e062";}
+.glyphicon-adjust:before{content:"\e063";}
+.glyphicon-tint:before{content:"\e064";}
+.glyphicon-edit:before{content:"\e065";}
+.glyphicon-share:before{content:"\e066";}
+.glyphicon-check:before{content:"\e067";}
+.glyphicon-move:before{content:"\e068";}
+.glyphicon-step-backward:before{content:"\e069";}
+.glyphicon-fast-backward:before{content:"\e070";}
+.glyphicon-backward:before{content:"\e071";}
+.glyphicon-play:before{content:"\e072";}
+.glyphicon-pause:before{content:"\e073";}
+.glyphicon-stop:before{content:"\e074";}
+.glyphicon-forward:before{content:"\e075";}
+.glyphicon-fast-forward:before{content:"\e076";}
+.glyphicon-step-forward:before{content:"\e077";}
+.glyphicon-eject:before{content:"\e078";}
+.glyphicon-chevron-left:before{content:"\e079";}
+.glyphicon-chevron-right:before{content:"\e080";}
+.glyphicon-plus-sign:before{content:"\e081";}
+.glyphicon-minus-sign:before{content:"\e082";}
+.glyphicon-remove-sign:before{content:"\e083";}
+.glyphicon-ok-sign:before{content:"\e084";}
+.glyphicon-question-sign:before{content:"\e085";}
+.glyphicon-info-sign:before{content:"\e086";}
+.glyphicon-screenshot:before{content:"\e087";}
+.glyphicon-remove-circle:before{content:"\e088";}
+.glyphicon-ok-circle:before{content:"\e089";}
+.glyphicon-ban-circle:before{content:"\e090";}
+.glyphicon-arrow-left:before{content:"\e091";}
+.glyphicon-arrow-right:before{content:"\e092";}
+.glyphicon-arrow-up:before{content:"\e093";}
+.glyphicon-arrow-down:before{content:"\e094";}
+.glyphicon-share-alt:before{content:"\e095";}
+.glyphicon-resize-full:before{content:"\e096";}
+.glyphicon-resize-small:before{content:"\e097";}
+.glyphicon-exclamation-sign:before{content:"\e101";}
+.glyphicon-gift:before{content:"\e102";}
+.glyphicon-leaf:before{content:"\e103";}
+.glyphicon-eye-open:before{content:"\e105";}
+.glyphicon-eye-close:before{content:"\e106";}
+.glyphicon-warning-sign:before{content:"\e107";}
+.glyphicon-plane:before{content:"\e108";}
+.glyphicon-random:before{content:"\e110";}
+.glyphicon-comment:before{content:"\e111";}
+.glyphicon-magnet:before{content:"\e112";}
+.glyphicon-chevron-up:before{content:"\e113";}
+.glyphicon-chevron-down:before{content:"\e114";}
+.glyphicon-retweet:before{content:"\e115";}
+.glyphicon-shopping-cart:before{content:"\e116";}
+.glyphicon-folder-close:before{content:"\e117";}
+.glyphicon-folder-open:before{content:"\e118";}
+.glyphicon-resize-vertical:before{content:"\e119";}
+.glyphicon-resize-horizontal:before{content:"\e120";}
+.glyphicon-hdd:before{content:"\e121";}
+.glyphicon-bullhorn:before{content:"\e122";}
+.glyphicon-certificate:before{content:"\e124";}
+.glyphicon-thumbs-up:before{content:"\e125";}
+.glyphicon-thumbs-down:before{content:"\e126";}
+.glyphicon-hand-right:before{content:"\e127";}
+.glyphicon-hand-left:before{content:"\e128";}
+.glyphicon-hand-up:before{content:"\e129";}
+.glyphicon-hand-down:before{content:"\e130";}
+.glyphicon-circle-arrow-right:before{content:"\e131";}
+.glyphicon-circle-arrow-left:before{content:"\e132";}
+.glyphicon-circle-arrow-up:before{content:"\e133";}
+.glyphicon-circle-arrow-down:before{content:"\e134";}
+.glyphicon-globe:before{content:"\e135";}
+.glyphicon-tasks:before{content:"\e137";}
+.glyphicon-filter:before{content:"\e138";}
+.glyphicon-fullscreen:before{content:"\e140";}
+.glyphicon-dashboard:before{content:"\e141";}
+.glyphicon-heart-empty:before{content:"\e143";}
+.glyphicon-link:before{content:"\e144";}
+.glyphicon-phone:before{content:"\e145";}
+.glyphicon-usd:before{content:"\e148";}
+.glyphicon-gbp:before{content:"\e149";}
+.glyphicon-sort:before{content:"\e150";}
+.glyphicon-sort-by-alphabet:before{content:"\e151";}
+.glyphicon-sort-by-alphabet-alt:before{content:"\e152";}
+.glyphicon-sort-by-order:before{content:"\e153";}
+.glyphicon-sort-by-order-alt:before{content:"\e154";}
+.glyphicon-sort-by-attributes:before{content:"\e155";}
+.glyphicon-sort-by-attributes-alt:before{content:"\e156";}
+.glyphicon-unchecked:before{content:"\e157";}
+.glyphicon-expand:before{content:"\e158";}
+.glyphicon-collapse-down:before{content:"\e159";}
+.glyphicon-collapse-up:before{content:"\e160";}
+.glyphicon-log-in:before{content:"\e161";}
+.glyphicon-flash:before{content:"\e162";}
+.glyphicon-log-out:before{content:"\e163";}
+.glyphicon-new-window:before{content:"\e164";}
+.glyphicon-record:before{content:"\e165";}
+.glyphicon-save:before{content:"\e166";}
+.glyphicon-open:before{content:"\e167";}
+.glyphicon-saved:before{content:"\e168";}
+.glyphicon-import:before{content:"\e169";}
+.glyphicon-export:before{content:"\e170";}
+.glyphicon-send:before{content:"\e171";}
+.glyphicon-floppy-disk:before{content:"\e172";}
+.glyphicon-floppy-saved:before{content:"\e173";}
+.glyphicon-floppy-remove:before{content:"\e174";}
+.glyphicon-floppy-save:before{content:"\e175";}
+.glyphicon-floppy-open:before{content:"\e176";}
+.glyphicon-credit-card:before{content:"\e177";}
+.glyphicon-transfer:before{content:"\e178";}
+.glyphicon-cutlery:before{content:"\e179";}
+.glyphicon-header:before{content:"\e180";}
+.glyphicon-compressed:before{content:"\e181";}
+.glyphicon-earphone:before{content:"\e182";}
+.glyphicon-phone-alt:before{content:"\e183";}
+.glyphicon-tower:before{content:"\e184";}
+.glyphicon-stats:before{content:"\e185";}
+.glyphicon-sd-video:before{content:"\e186";}
+.glyphicon-hd-video:before{content:"\e187";}
+.glyphicon-subtitles:before{content:"\e188";}
+.glyphicon-sound-stereo:before{content:"\e189";}
+.glyphicon-sound-dolby:before{content:"\e190";}
+.glyphicon-sound-5-1:before{content:"\e191";}
+.glyphicon-sound-6-1:before{content:"\e192";}
+.glyphicon-sound-7-1:before{content:"\e193";}
+.glyphicon-copyright-mark:before{content:"\e194";}
+.glyphicon-registration-mark:before{content:"\e195";}
+.glyphicon-cloud-download:before{content:"\e197";}
+.glyphicon-cloud-upload:before{content:"\e198";}
+.glyphicon-tree-conifer:before{content:"\e199";}
+.glyphicon-tree-deciduous:before{content:"\e200";}
+.glyphicon-briefcase:before{content:"\1f4bc";}
+.glyphicon-calendar:before{content:"\1f4c5";}
+.glyphicon-pushpin:before{content:"\1f4cc";}
+.glyphicon-paperclip:before{content:"\1f4ce";}
+.glyphicon-camera:before{content:"\1f4f7";}
+.glyphicon-lock:before{content:"\1f512";}
+.glyphicon-bell:before{content:"\1f514";}
+.glyphicon-bookmark:before{content:"\1f516";}
+.glyphicon-fire:before{content:"\1f525";}
+.glyphicon-wrench:before{content:"\1f527";}
+</style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    
+                    <style>
+                        .foliumtooltip {
+                            
+                        }
+                       .foliumtooltip table{
+                            margin: auto;
+                        }
+                        .foliumtooltip tr{
+                            text-align: left;
+                        }
+                        .foliumtooltip th{
+                            padding: 2px; padding-right: 8px;
+                        }
+                    </style>
+            
+    
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>$( function() {
+        $( ".maplegend" ).draggable({
+            start: function (event, ui) {
+                $(this).css({
+                    right: "auto",
+                    top: "auto",
+                    bottom: "auto"
+                });
+            }
+        });
+    });
+    </script>
+    <style type='text/css'>
+      .maplegend {
+        position: absolute;
+        z-index:9999;
+        background-color: rgba(255, 255, 255, .8);
+        border-radius: 5px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        padding: 10px;
+        font: 12px/14px Arial, Helvetica, sans-serif;
+        right: 10px;
+        bottom: 20px;
+      }
+      .maplegend .legend-title {
+        text-align: left;
+        margin-bottom: 5px;
+        font-weight: bold;
+        }
+      .maplegend .legend-scale ul {
+        margin: 0;
+        margin-bottom: 0px;
+        padding: 0;
+        float: left;
+        list-style: none;
+        }
+      .maplegend .legend-scale ul li {
+        list-style: none;
+        margin-left: 0;
+        line-height: 16px;
+        margin-bottom: 2px;
+        }
+      .maplegend ul.legend-labels li span {
+        display: block;
+        float: left;
+        height: 14px;
+        width: 14px;
+        margin-right: 5px;
+        margin-left: 0;
+        border: 0px solid #ccc;
+        }
+      .maplegend .legend-source {
+        color: #777;
+        clear: both;
+        }
+      .maplegend a {
+        color: #777;
+        }
+    </style>
+    
+</head>
+<body>
+    
+    
+    <div id='maplegend Locality' class='maplegend'>
+        <div class='legend-title'>Locality</div>
+        <div class='legend-scale'>
+            <ul class='legend-labels'>
+                <li><span style='background:#1b9e77'></span>Guadalajara</li>
+                <li><span style='background:#d95f02'></span>Zapopan</li>
+                <li><span style='background:#7570b3'></span>Tlaquepaque</li>
+                <li><span style='background:#e7298a'></span>Tonalá</li>
+            </ul>
+        </div>
+    </div>
+    
+    
+            <div class="folium-map" id="map_5af264a0150368ee87a38bff23e5bae6" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_5af264a0150368ee87a38bff23e5bae6 = L.map(
+                "map_5af264a0150368ee87a38bff23e5bae6",
+                {
+                    center: [20.673735,-103.35002],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 10,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_5af264a0150368ee87a38bff23e5bae6);
+
+            
+
+        
+    
+            var tile_layer_03399a0641f8143960892d0305687e50 = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 16,
+  "maxNativeZoom": 16,
+  "noWrap": false,
+  "attribution": "Tiles \u0026copy; Esri \u0026mdash; Esri, DeLorme, NAVTEQ",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_03399a0641f8143960892d0305687e50.addTo(map_5af264a0150368ee87a38bff23e5bae6);
+        
+    
+            map_5af264a0150368ee87a38bff23e5bae6.fitBounds(
+                [[20.55375,-103.48613],[20.79372,-103.21391]],
+                {}
+            );
+        
+    
+        function geo_json_86ffa96673bccbd73fb9183f47fada8b_styler(feature) {
+            switch(feature.id) {
+                case "0": 
+                    return {"color": "#1b9e77", "fillColor": "#1b9e77", "fillOpacity": 0.6, "weight": 1};
+                case "1": 
+                    return {"color": "#7570b3", "fillColor": "#7570b3", "fillOpacity": 0.6, "weight": 1};
+                case "2": 
+                    return {"color": "#e7298a", "fillColor": "#e7298a", "fillOpacity": 0.6, "weight": 1};
+                default:
+                    return {"color": "#d95f02", "fillColor": "#d95f02", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_86ffa96673bccbd73fb9183f47fada8b_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillOpacity": 0.75};
+            }
+        }
+        function geo_json_86ffa96673bccbd73fb9183f47fada8b_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 2,
+};
+            
+            let style = geo_json_86ffa96673bccbd73fb9183f47fada8b_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_86ffa96673bccbd73fb9183f47fada8b_onEachFeature(feature, layer) {
+            (function propagate(parent){
+                if (typeof parent.eachLayer !== "function") {return;}
+                parent.eachLayer(function (child) {
+                    if (child.feature === undefined) { child.feature = feature; }
+                    propagate(child);
+                })
+            })(layer)
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_86ffa96673bccbd73fb9183f47fada8b.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_86ffa96673bccbd73fb9183f47fada8b_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_86ffa96673bccbd73fb9183f47fada8b = L.geoJson(null, {
+                onEachFeature: geo_json_86ffa96673bccbd73fb9183f47fada8b_onEachFeature,
+            
+                style: geo_json_86ffa96673bccbd73fb9183f47fada8b_styler,
+                pointToLayer: geo_json_86ffa96673bccbd73fb9183f47fada8b_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_86ffa96673bccbd73fb9183f47fada8b_add (data) {
+            geo_json_86ffa96673bccbd73fb9183f47fada8b
+                .addData(data);
+        }
+            geo_json_86ffa96673bccbd73fb9183f47fada8b_add({"features": [{"geometry": {"coordinates": [[[-103.31387,20.74265],[-103.31306,20.7424],[-103.31112,20.74265],[-103.31079,20.74238],[-103.31096,20.74171],[-103.30999,20.7416],[-103.30925,20.74117],[-103.30825,20.73987],[-103.30778,20.73783],[-103.30724,20.73698],[-103.30737,20.73599],[-103.30782,20.73537],[-103.308,20.73448],[-103.30849,20.7344],[-103.30844,20.7339],[-103.30771,20.73383],[-103.3068,20.73418],[-103.30653,20.7341],[-103.30581,20.73314],[-103.30481,20.73309],[-103.30405,20.73539],[-103.30352,20.73573],[-103.30274,20.7357],[-103.30126,20.7353],[-103.29965,20.73413],[-103.29959,20.73388],[-103.298,20.73251],[-103.29764,20.73251],[-103.29717,20.73282],[-103.29674,20.73284],[-103.2964,20.73258],[-103.29475,20.73259],[-103.29378,20.73226],[-103.29341,20.73135],[-103.29326,20.73049],[-103.29269,20.7295],[-103.29188,20.72864],[-103.29137,20.72784],[-103.29081,20.72659],[-103.29065,20.72562],[-103.2897,20.72423],[-103.28958,20.72292],[-103.28891,20.72113],[-103.28951,20.71752],[-103.28982,20.71735],[-103.28988,20.7171],[-103.28937,20.71669],[-103.28925,20.7152],[-103.28984,20.71485],[-103.29004,20.71462],[-103.29003,20.71439],[-103.28933,20.71404],[-103.28845,20.713],[-103.28674,20.71181],[-103.28631,20.71115],[-103.28629,20.70983],[-103.28599,20.70891],[-103.28615,20.70834],[-103.28598,20.70807],[-103.28654,20.70787],[-103.28577,20.70497],[-103.28531,20.70436],[-103.2845,20.70384],[-103.28302,20.70574],[-103.28032,20.70416],[-103.27975,20.70411],[-103.27941,20.70383],[-103.27808,20.70185],[-103.27754,20.70143],[-103.27733,20.70143],[-103.27653,20.70059],[-103.27608,20.70061],[-103.27463,20.6998],[-103.27307,20.69934],[-103.27273,20.69909],[-103.27268,20.6989],[-103.27217,20.69852],[-103.27153,20.6964],[-103.27104,20.69588],[-103.27039,20.69559],[-103.26987,20.6951],[-103.26978,20.6946],[-103.26998,20.69365],[-103.27042,20.69389],[-103.27035,20.69141],[-103.27057,20.69081],[-103.27059,20.68978],[-103.27027,20.68922],[-103.26934,20.68841],[-103.26898,20.68777],[-103.26889,20.68595],[-103.26798,20.68372],[-103.26802,20.68318],[-103.26757,20.68208],[-103.26645,20.68186],[-103.26675,20.68144],[-103.26738,20.68128],[-103.26736,20.68095],[-103.26755,20.68058],[-103.26727,20.68022],[-103.26725,20.67979],[-103.26778,20.67919],[-103.26747,20.67891],[-103.26798,20.67805],[-103.26729,20.67647],[-103.26703,20.67642],[-103.26582,20.67744],[-103.2647,20.67545],[-103.26469,20.67415],[-103.26401,20.67164],[-103.26418,20.6702],[-103.26376,20.66878],[-103.26382,20.6682],[-103.26408,20.66774],[-103.26559,20.66702],[-103.26771,20.66405],[-103.26775,20.66194],[-103.26813,20.66],[-103.26769,20.65877],[-103.2674,20.65528],[-103.26748,20.655],[-103.26907,20.65321],[-103.26988,20.64932],[-103.27029,20.64891],[-103.27032,20.64843],[-103.27004,20.64823],[-103.27012,20.64795],[-103.27064,20.64805],[-103.27083,20.6473],[-103.27013,20.64632],[-103.26966,20.64514],[-103.26979,20.64499],[-103.27008,20.64506],[-103.27284,20.64599],[-103.27357,20.64539],[-103.27449,20.64506],[-103.2754,20.64417],[-103.27629,20.64396],[-103.27749,20.64391],[-103.27786,20.64375],[-103.27889,20.64283],[-103.2794,20.64256],[-103.28067,20.6411],[-103.28739,20.64151],[-103.28746,20.64087],[-103.28899,20.64096],[-103.28889,20.64195],[-103.28938,20.64201],[-103.28932,20.64265],[-103.28967,20.64276],[-103.29046,20.64284],[-103.29058,20.64193],[-103.29149,20.64204],[-103.29145,20.64226],[-103.31159,20.64424],[-103.31131,20.64572],[-103.31091,20.64593],[-103.31161,20.64618],[-103.31287,20.64552],[-103.31641,20.64674],[-103.31678,20.64555],[-103.32069,20.64632],[-103.31788,20.64254],[-103.31911,20.64172],[-103.31874,20.64142],[-103.31873,20.63842],[-103.31979,20.63841],[-103.31981,20.63281],[-103.32005,20.63278],[-103.32092,20.6308],[-103.32242,20.6292],[-103.32436,20.62658],[-103.3247,20.62631],[-103.32678,20.62655],[-103.32913,20.62801],[-103.33107,20.62537],[-103.33156,20.62395],[-103.33183,20.62364],[-103.33251,20.62327],[-103.33281,20.62223],[-103.33236,20.62211],[-103.33054,20.62078],[-103.32967,20.6206],[-103.33006,20.61886],[-103.33038,20.61864],[-103.33142,20.61716],[-103.33252,20.61655],[-103.33315,20.616],[-103.33588,20.61298],[-103.33905,20.6146],[-103.33978,20.6147],[-103.34002,20.61071],[-103.34034,20.60935],[-103.34219,20.60899],[-103.34418,20.60883],[-103.34645,20.60835],[-103.34699,20.60999],[-103.34689,20.61042],[-103.34705,20.61092],[-103.35029,20.61279],[-103.35068,20.61346],[-103.35051,20.61393],[-103.35057,20.61417],[-103.35234,20.6153],[-103.35312,20.61415],[-103.35395,20.61378],[-103.35706,20.61427],[-103.36184,20.61475],[-103.36581,20.6154],[-103.36651,20.61408],[-103.36661,20.61302],[-103.36681,20.6125],[-103.36729,20.61196],[-103.36764,20.61227],[-103.36805,20.61094],[-103.36858,20.61122],[-103.36878,20.61065],[-103.37035,20.61126],[-103.37028,20.61164],[-103.37526,20.61287],[-103.37618,20.60959],[-103.37716,20.61002],[-103.37754,20.6091],[-103.37911,20.60971],[-103.38086,20.60986],[-103.38406,20.61127],[-103.38737,20.60367],[-103.38886,20.60469],[-103.38938,20.60481],[-103.38821,20.60695],[-103.38907,20.60731],[-103.38795,20.61082],[-103.3889,20.61183],[-103.38936,20.61198],[-103.38939,20.61297],[-103.39026,20.61295],[-103.39265,20.61203],[-103.39415,20.61225],[-103.39449,20.61146],[-103.39516,20.61228],[-103.39625,20.61307],[-103.3899,20.62084],[-103.39913,20.62623],[-103.39703,20.63378],[-103.39687,20.63374],[-103.3965,20.63509],[-103.39603,20.63498],[-103.3958,20.63589],[-103.39637,20.63614],[-103.397,20.6371],[-103.39715,20.6376],[-103.39702,20.63819],[-103.39515,20.64225],[-103.39612,20.6422],[-103.39693,20.64182],[-103.39786,20.64182],[-103.39992,20.64294],[-103.39871,20.64546],[-103.39837,20.64697],[-103.39848,20.64926],[-103.3993,20.65054],[-103.39353,20.65387],[-103.3939,20.65465],[-103.39356,20.65485],[-103.39691,20.65603],[-103.39793,20.65688],[-103.3988,20.6572],[-103.39737,20.65937],[-103.39929,20.66079],[-103.40067,20.66221],[-103.40186,20.66411],[-103.40254,20.66573],[-103.40217,20.66596],[-103.40212,20.66659],[-103.40284,20.66696],[-103.40274,20.66765],[-103.401,20.67049],[-103.40037,20.67135],[-103.39999,20.67139],[-103.40006,20.67381],[-103.40015,20.67447],[-103.40274,20.67488],[-103.40248,20.67812],[-103.40368,20.67795],[-103.40367,20.68154],[-103.40309,20.68156],[-103.4031,20.68126],[-103.40186,20.68139],[-103.40159,20.68162],[-103.40084,20.68175],[-103.40137,20.68707],[-103.40069,20.68736],[-103.39856,20.68986],[-103.39856,20.69013],[-103.39815,20.69087],[-103.39948,20.69186],[-103.40086,20.69179],[-103.40256,20.69098],[-103.4031,20.69109],[-103.40337,20.69126],[-103.40364,20.69197],[-103.40423,20.69177],[-103.40511,20.69256],[-103.40425,20.69331],[-103.40235,20.69423],[-103.40264,20.6947],[-103.40259,20.69505],[-103.40112,20.69602],[-103.40141,20.69636],[-103.40138,20.69653],[-103.39975,20.69796],[-103.39949,20.69921],[-103.3995,20.69936],[-103.40015,20.69956],[-103.40124,20.69924],[-103.40177,20.69951],[-103.40186,20.70092],[-103.40315,20.70202],[-103.40303,20.70281],[-103.40248,20.70387],[-103.40694,20.70966],[-103.40658,20.71122],[-103.40602,20.71194],[-103.40551,20.71211],[-103.40471,20.71202],[-103.40377,20.71154],[-103.40091,20.71102],[-103.39999,20.71116],[-103.39687,20.71213],[-103.39565,20.71226],[-103.39451,20.71183],[-103.39203,20.70995],[-103.39141,20.70972],[-103.39045,20.70969],[-103.38698,20.71018],[-103.38128,20.71138],[-103.38074,20.71175],[-103.38034,20.7112],[-103.37566,20.71199],[-103.37518,20.71234],[-103.37553,20.71256],[-103.3741,20.7133],[-103.37139,20.71391],[-103.37081,20.71384],[-103.37016,20.7134],[-103.36244,20.71288],[-103.35845,20.71417],[-103.35632,20.71564],[-103.35597,20.71568],[-103.3531,20.71513],[-103.35011,20.7166],[-103.34839,20.7168],[-103.34738,20.71725],[-103.3466,20.71642],[-103.34578,20.71591],[-103.34456,20.71604],[-103.34425,20.71635],[-103.34423,20.71748],[-103.34345,20.71821],[-103.34314,20.71913],[-103.34169,20.72002],[-103.34156,20.72031],[-103.34159,20.72162],[-103.34107,20.7222],[-103.34092,20.72316],[-103.3392,20.72395],[-103.33842,20.72405],[-103.3357,20.72541],[-103.33486,20.72632],[-103.33457,20.72747],[-103.33475,20.72782],[-103.33439,20.72816],[-103.33416,20.72824],[-103.33346,20.72764],[-103.33297,20.72759],[-103.33233,20.72823],[-103.33129,20.72834],[-103.33133,20.72811],[-103.33064,20.7281],[-103.33011,20.72847],[-103.33004,20.72877],[-103.3292,20.72859],[-103.32994,20.72929],[-103.32905,20.72988],[-103.32874,20.73117],[-103.32849,20.73117],[-103.3285,20.7315],[-103.32813,20.73216],[-103.32759,20.73279],[-103.32758,20.73318],[-103.32721,20.73338],[-103.32674,20.73293],[-103.32528,20.7341],[-103.32507,20.7345],[-103.32427,20.73462],[-103.32342,20.73515],[-103.32302,20.73566],[-103.32272,20.73648],[-103.32242,20.73843],[-103.32262,20.73883],[-103.32263,20.73985],[-103.32304,20.74068],[-103.32346,20.74107],[-103.32355,20.74173],[-103.32341,20.74184],[-103.32285,20.74169],[-103.32137,20.74194],[-103.32129,20.74173],[-103.32059,20.74185],[-103.32048,20.74205],[-103.31829,20.74228],[-103.31772,20.74241],[-103.31626,20.74322],[-103.31552,20.74329],[-103.31492,20.74311],[-103.31351,20.74385],[-103.31387,20.74265]]], "type": "Polygon"}, "id": "0", "properties": {"CVEGEO": "140390001", "NOMGEO": "Guadalajara", "__folium_color": "#1b9e77"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-103.31287,20.64552],[-103.31161,20.64618],[-103.31091,20.64593],[-103.31131,20.64572],[-103.31159,20.64424],[-103.29145,20.64226],[-103.29149,20.64204],[-103.29058,20.64193],[-103.29046,20.64284],[-103.28967,20.64276],[-103.28932,20.64265],[-103.28938,20.64201],[-103.28889,20.64195],[-103.28899,20.64096],[-103.28746,20.64087],[-103.28739,20.64151],[-103.28223,20.64118],[-103.2831,20.63973],[-103.28388,20.63622],[-103.28534,20.63103],[-103.28531,20.62909],[-103.28547,20.62852],[-103.28673,20.62626],[-103.28569,20.6258],[-103.28487,20.62564],[-103.28138,20.62407],[-103.28134,20.62357],[-103.28258,20.61648],[-103.28209,20.61653],[-103.28204,20.61634],[-103.28348,20.61623],[-103.2839,20.61591],[-103.28409,20.61559],[-103.28413,20.61492],[-103.28382,20.61429],[-103.28294,20.61304],[-103.28025,20.61358],[-103.27607,20.61341],[-103.27632,20.61194],[-103.27575,20.61185],[-103.2662,20.61173],[-103.26055,20.61178],[-103.25934,20.61195],[-103.25728,20.61183],[-103.25714,20.61034],[-103.25718,20.60737],[-103.25712,20.60689],[-103.2564,20.60521],[-103.25645,20.60417],[-103.25608,20.60238],[-103.25643,20.60137],[-103.25701,20.60074],[-103.25649,20.6005],[-103.2566,20.59917],[-103.25689,20.59917],[-103.25754,20.59826],[-103.25711,20.59792],[-103.25743,20.59598],[-103.2572,20.59595],[-103.2578,20.59146],[-103.25842,20.59172],[-103.25913,20.59174],[-103.2588,20.59049],[-103.25824,20.59032],[-103.25801,20.59099],[-103.25752,20.59084],[-103.25875,20.58792],[-103.25996,20.58823],[-103.26009,20.58758],[-103.25688,20.58455],[-103.25632,20.58715],[-103.24191,20.58319],[-103.24036,20.58318],[-103.24031,20.58085],[-103.24118,20.5809],[-103.24131,20.57812],[-103.24123,20.57757],[-103.23936,20.57396],[-103.23961,20.57298],[-103.24298,20.57129],[-103.24552,20.57097],[-103.24566,20.57365],[-103.24596,20.57365],[-103.24654,20.57413],[-103.24651,20.57453],[-103.24694,20.57479],[-103.2488,20.57485],[-103.25055,20.57561],[-103.25026,20.57661],[-103.25039,20.57698],[-103.25028,20.57748],[-103.25206,20.57762],[-103.25296,20.57807],[-103.2534,20.57856],[-103.25376,20.5786],[-103.25375,20.57759],[-103.25515,20.57765],[-103.25719,20.578],[-103.25957,20.57806],[-103.26293,20.5785],[-103.26289,20.5773],[-103.26328,20.57645],[-103.26467,20.5766],[-103.26454,20.57697],[-103.26538,20.57702],[-103.26508,20.57865],[-103.26468,20.57862],[-103.26492,20.5796],[-103.26715,20.57957],[-103.26737,20.58017],[-103.26744,20.58076],[-103.26668,20.58079],[-103.26714,20.58379],[-103.26638,20.58385],[-103.26662,20.5844],[-103.26762,20.58556],[-103.26779,20.58607],[-103.26862,20.58583],[-103.26982,20.58729],[-103.26994,20.58725],[-103.27007,20.58776],[-103.2715,20.58744],[-103.27164,20.58798],[-103.27221,20.5879],[-103.27211,20.58714],[-103.27435,20.58686],[-103.27421,20.58825],[-103.27426,20.59076],[-103.27484,20.59065],[-103.27485,20.59046],[-103.27543,20.59038],[-103.27544,20.59012],[-103.27568,20.59011],[-103.27568,20.59071],[-103.2778,20.58992],[-103.27746,20.58917],[-103.28061,20.58945],[-103.28086,20.58963],[-103.28158,20.5897],[-103.2816,20.58943],[-103.28241,20.58947],[-103.2824,20.58963],[-103.28368,20.58966],[-103.28384,20.58974],[-103.28383,20.59],[-103.28504,20.59009],[-103.28505,20.58996],[-103.28555,20.58997],[-103.28553,20.59042],[-103.28685,20.59048],[-103.28686,20.59017],[-103.28756,20.59021],[-103.28758,20.59066],[-103.2879,20.59067],[-103.28787,20.59158],[-103.28826,20.59165],[-103.28848,20.592],[-103.29082,20.59249],[-103.29092,20.59224],[-103.29294,20.59212],[-103.29318,20.59172],[-103.29459,20.59061],[-103.29511,20.59066],[-103.29646,20.59151],[-103.29698,20.59093],[-103.29692,20.59058],[-103.29658,20.59013],[-103.29693,20.58972],[-103.29804,20.58949],[-103.29916,20.58952],[-103.2994,20.58991],[-103.29924,20.5908],[-103.30084,20.59094],[-103.3008,20.59146],[-103.30246,20.59159],[-103.30284,20.59223],[-103.30263,20.59247],[-103.30253,20.59311],[-103.30536,20.59312],[-103.30546,20.59348],[-103.30645,20.59403],[-103.30686,20.59398],[-103.30694,20.59339],[-103.30791,20.59358],[-103.3082,20.59346],[-103.30952,20.59348],[-103.30851,20.59236],[-103.3071,20.59219],[-103.30699,20.59146],[-103.3062,20.59089],[-103.3062,20.59066],[-103.30487,20.59048],[-103.30494,20.5898],[-103.30378,20.58944],[-103.30376,20.58852],[-103.30248,20.58851],[-103.30248,20.58841],[-103.30218,20.58846],[-103.30183,20.58882],[-103.30153,20.58839],[-103.30186,20.58623],[-103.30283,20.58635],[-103.30312,20.58472],[-103.30297,20.58471],[-103.30303,20.5841],[-103.30213,20.58401],[-103.30203,20.58464],[-103.30104,20.58448],[-103.30101,20.58304],[-103.30224,20.58298],[-103.30233,20.5825],[-103.30427,20.58269],[-103.30434,20.5824],[-103.30665,20.58278],[-103.30672,20.58133],[-103.30475,20.58111],[-103.30513,20.58102],[-103.30549,20.58059],[-103.30592,20.57688],[-103.306,20.57678],[-103.30947,20.57722],[-103.31044,20.57603],[-103.31222,20.5747],[-103.31275,20.57549],[-103.3143,20.57565],[-103.31888,20.58516],[-103.33016,20.57811],[-103.33162,20.57826],[-103.33342,20.57221],[-103.33343,20.57168],[-103.33278,20.56864],[-103.33211,20.55701],[-103.33145,20.55385],[-103.33236,20.55375],[-103.3361,20.55438],[-103.34228,20.55516],[-103.34709,20.5555],[-103.35361,20.55552],[-103.35375,20.55532],[-103.35963,20.55512],[-103.36086,20.55559],[-103.36317,20.55767],[-103.36348,20.55821],[-103.36346,20.55943],[-103.36283,20.56208],[-103.36334,20.56294],[-103.35796,20.57189],[-103.36,20.57238],[-103.3632,20.57262],[-103.3682,20.57186],[-103.36898,20.5715],[-103.36922,20.57272],[-103.36995,20.57331],[-103.36992,20.57426],[-103.37097,20.57505],[-103.37157,20.57583],[-103.37142,20.57507],[-103.37202,20.57495],[-103.37223,20.5754],[-103.3754,20.5758],[-103.37525,20.5757],[-103.37547,20.57453],[-103.38049,20.57532],[-103.38102,20.57052],[-103.38249,20.57024],[-103.38282,20.57037],[-103.38296,20.57062],[-103.3828,20.57206],[-103.38123,20.57187],[-103.38117,20.57285],[-103.38287,20.57308],[-103.3844,20.57418],[-103.38582,20.57427],[-103.38584,20.57407],[-103.38631,20.57411],[-103.38651,20.57424],[-103.38917,20.57456],[-103.38937,20.57472],[-103.38912,20.57544],[-103.39167,20.57641],[-103.39158,20.57484],[-103.39502,20.57637],[-103.39535,20.57567],[-103.39622,20.57613],[-103.39589,20.57677],[-103.40172,20.5794],[-103.4014,20.58015],[-103.40275,20.58066],[-103.40245,20.58186],[-103.40652,20.58408],[-103.40609,20.58558],[-103.40613,20.58594],[-103.40672,20.5868],[-103.40782,20.58702],[-103.40713,20.58862],[-103.40774,20.58895],[-103.40836,20.58962],[-103.40928,20.58745],[-103.41502,20.59071],[-103.4182,20.58862],[-103.42349,20.58474],[-103.42895,20.58015],[-103.42887,20.57981],[-103.43022,20.57577],[-103.43059,20.57504],[-103.43279,20.57649],[-103.43303,20.57681],[-103.4301,20.57928],[-103.43094,20.58818],[-103.42383,20.58575],[-103.42351,20.58479],[-103.41823,20.58862],[-103.41999,20.58955],[-103.42034,20.59943],[-103.42029,20.60026],[-103.41907,20.60552],[-103.41955,20.60678],[-103.41989,20.60866],[-103.42131,20.6103],[-103.42183,20.61071],[-103.42165,20.612],[-103.4228,20.61237],[-103.42467,20.61343],[-103.42587,20.61573],[-103.42588,20.61622],[-103.42312,20.62044],[-103.42285,20.62031],[-103.42307,20.6199],[-103.42298,20.61982],[-103.41721,20.61612],[-103.4119,20.6179],[-103.4111,20.61964],[-103.41044,20.62016],[-103.40864,20.62011],[-103.40849,20.62022],[-103.40837,20.62093],[-103.40762,20.62044],[-103.40493,20.61917],[-103.40178,20.61957],[-103.40032,20.62062],[-103.40049,20.62098],[-103.40044,20.62131],[-103.40361,20.62079],[-103.40411,20.62106],[-103.40076,20.63352],[-103.39791,20.63538],[-103.39664,20.63656],[-103.39637,20.63614],[-103.3958,20.63589],[-103.39603,20.63498],[-103.3965,20.63509],[-103.39687,20.63374],[-103.39703,20.63378],[-103.39913,20.62623],[-103.3899,20.62084],[-103.39625,20.61307],[-103.39516,20.61228],[-103.39449,20.61146],[-103.39415,20.61225],[-103.39265,20.61203],[-103.39026,20.61295],[-103.38939,20.61297],[-103.38936,20.61198],[-103.3889,20.61183],[-103.38795,20.61082],[-103.38907,20.60731],[-103.38821,20.60695],[-103.38938,20.60481],[-103.38886,20.60469],[-103.38737,20.60367],[-103.38406,20.61127],[-103.38086,20.60986],[-103.37911,20.60971],[-103.37754,20.6091],[-103.37716,20.61002],[-103.37618,20.60959],[-103.37526,20.61287],[-103.37028,20.61164],[-103.37035,20.61126],[-103.36878,20.61065],[-103.36858,20.61122],[-103.36805,20.61094],[-103.36764,20.61227],[-103.36726,20.61191],[-103.36687,20.61192],[-103.36688,20.61176],[-103.36661,20.61176],[-103.36659,20.61218],[-103.36403,20.61199],[-103.36431,20.60938],[-103.36424,20.60616],[-103.36373,20.60599],[-103.36403,20.60497],[-103.36493,20.60352],[-103.36542,20.60235],[-103.36625,20.59991],[-103.36845,20.60157],[-103.37553,20.59913],[-103.37707,20.59848],[-103.38272,20.59666],[-103.38292,20.59561],[-103.3832,20.59526],[-103.38285,20.59524],[-103.38344,20.59456],[-103.38348,20.59431],[-103.38337,20.5916],[-103.38295,20.59148],[-103.38342,20.59103],[-103.3835,20.58946],[-103.38381,20.58824],[-103.38323,20.58762],[-103.38292,20.58804],[-103.38193,20.58786],[-103.38146,20.58761],[-103.38104,20.58772],[-103.37941,20.58752],[-103.37989,20.5869],[-103.37889,20.58661],[-103.37602,20.58636],[-103.37512,20.58533],[-103.37471,20.58458],[-103.37345,20.58404],[-103.37342,20.58564],[-103.37188,20.58532],[-103.37218,20.58355],[-103.37069,20.58322],[-103.37044,20.583],[-103.3666,20.58147],[-103.36669,20.58095],[-103.36624,20.58083],[-103.36582,20.58257],[-103.36623,20.58253],[-103.36635,20.5831],[-103.36594,20.58602],[-103.36719,20.58601],[-103.36771,20.58614],[-103.36757,20.5871],[-103.3658,20.58648],[-103.35931,20.58469],[-103.35852,20.58703],[-103.3613,20.58768],[-103.36215,20.59148],[-103.36258,20.59149],[-103.36226,20.59213],[-103.3627,20.59263],[-103.36253,20.5929],[-103.36269,20.59353],[-103.36057,20.59388],[-103.36024,20.59405],[-103.35737,20.59739],[-103.3557,20.59766],[-103.35593,20.59963],[-103.35536,20.59974],[-103.3555,20.60023],[-103.35687,20.60002],[-103.35735,20.60186],[-103.36312,20.60076],[-103.36333,20.60326],[-103.36311,20.60441],[-103.36258,20.60521],[-103.36302,20.60523],[-103.36311,20.60595],[-103.36265,20.60609],[-103.3626,20.60655],[-103.36349,20.60657],[-103.3634,20.60752],[-103.3608,20.60736],[-103.36038,20.60934],[-103.3615,20.61034],[-103.36108,20.61075],[-103.36076,20.61047],[-103.36064,20.61057],[-103.36017,20.6101],[-103.36003,20.61094],[-103.3595,20.61202],[-103.35722,20.61189],[-103.35614,20.61313],[-103.35631,20.61346],[-103.35709,20.61388],[-103.35709,20.61427],[-103.35395,20.61378],[-103.35312,20.61415],[-103.35234,20.6153],[-103.35057,20.61417],[-103.35051,20.61393],[-103.35068,20.61346],[-103.35029,20.61279],[-103.34705,20.61092],[-103.34689,20.61042],[-103.34699,20.60999],[-103.34645,20.60835],[-103.34418,20.60883],[-103.34219,20.60899],[-103.34034,20.60935],[-103.34002,20.61071],[-103.33978,20.6147],[-103.33905,20.6146],[-103.33588,20.61298],[-103.33315,20.616],[-103.33252,20.61655],[-103.33142,20.61716],[-103.33038,20.61864],[-103.33006,20.61886],[-103.32967,20.6206],[-103.33054,20.62078],[-103.33236,20.62211],[-103.33281,20.62223],[-103.33251,20.62327],[-103.33183,20.62364],[-103.33156,20.62395],[-103.33107,20.62537],[-103.32913,20.62801],[-103.32678,20.62655],[-103.3247,20.62631],[-103.32436,20.62658],[-103.32242,20.6292],[-103.32092,20.6308],[-103.32005,20.63278],[-103.31981,20.63281],[-103.31979,20.63841],[-103.31873,20.63842],[-103.31874,20.64142],[-103.31911,20.64172],[-103.31788,20.64254],[-103.32069,20.64632],[-103.31678,20.64555],[-103.31641,20.64674],[-103.31287,20.64552]],[[-103.35525,20.59431],[-103.35445,20.59446],[-103.3534,20.59396],[-103.35297,20.59518],[-103.3539,20.59477],[-103.35424,20.59519],[-103.3542,20.59564],[-103.35477,20.5959],[-103.35413,20.596],[-103.35449,20.59683],[-103.35603,20.59671],[-103.35621,20.59584],[-103.35606,20.59567],[-103.35629,20.5955],[-103.35536,20.59464],[-103.35525,20.59431]],[[-103.38469,20.57554],[-103.3821,20.57491],[-103.38194,20.57592],[-103.38311,20.57634],[-103.38308,20.57646],[-103.38456,20.57664],[-103.38469,20.57554]]], "type": "Polygon"}, "id": "1", "properties": {"CVEGEO": "140980001", "NOMGEO": "Tlaquepaque", "__folium_color": "#7570b3"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-103.26038,20.69344],[-103.26013,20.69338],[-103.25969,20.69247],[-103.25879,20.69181],[-103.25842,20.69239],[-103.25764,20.69308],[-103.25662,20.69316],[-103.25605,20.69283],[-103.25414,20.69357],[-103.25278,20.69326],[-103.25141,20.69347],[-103.24957,20.69301],[-103.24878,20.69301],[-103.24794,20.69263],[-103.24658,20.69266],[-103.2464,20.69249],[-103.24637,20.69182],[-103.2459,20.69123],[-103.24566,20.69145],[-103.24375,20.69191],[-103.24279,20.69285],[-103.23972,20.69328],[-103.23828,20.69367],[-103.23732,20.69371],[-103.23638,20.69351],[-103.23449,20.69253],[-103.2336,20.69229],[-103.23345,20.69189],[-103.23265,20.69167],[-103.23251,20.69103],[-103.23465,20.68854],[-103.23507,20.68837],[-103.23507,20.68888],[-103.235,20.68901],[-103.23462,20.68907],[-103.23452,20.68938],[-103.23592,20.68967],[-103.23579,20.69033],[-103.23755,20.69042],[-103.23849,20.6897],[-103.23746,20.68835],[-103.23671,20.68696],[-103.23559,20.68713],[-103.23491,20.68543],[-103.23362,20.68531],[-103.23232,20.68482],[-103.232,20.68328],[-103.23252,20.68325],[-103.23232,20.68219],[-103.23456,20.68203],[-103.23403,20.6805],[-103.23034,20.68076],[-103.22936,20.67894],[-103.22791,20.67702],[-103.22874,20.67665],[-103.22849,20.67649],[-103.22856,20.6755],[-103.22785,20.67552],[-103.22786,20.67563],[-103.226,20.67561],[-103.22617,20.67457],[-103.22736,20.67456],[-103.22737,20.67368],[-103.22881,20.67368],[-103.22478,20.67046],[-103.23497,20.66892],[-103.23228,20.6629],[-103.2321,20.66185],[-103.23213,20.66075],[-103.23452,20.65283],[-103.2375,20.64405],[-103.2381,20.64465],[-103.23878,20.64505],[-103.23878,20.64531],[-103.24064,20.64569],[-103.24062,20.64617],[-103.24218,20.64639],[-103.24196,20.64855],[-103.24779,20.64921],[-103.24755,20.64815],[-103.24765,20.6475],[-103.24752,20.64756],[-103.24737,20.64732],[-103.24578,20.64709],[-103.24562,20.64617],[-103.2458,20.64375],[-103.25009,20.64407],[-103.25014,20.64384],[-103.24992,20.64381],[-103.25037,20.64211],[-103.25002,20.64208],[-103.25008,20.6417],[-103.24955,20.64163],[-103.25012,20.6378],[-103.24972,20.6371],[-103.24932,20.63674],[-103.25048,20.63541],[-103.24997,20.63518],[-103.24973,20.63444],[-103.25004,20.63354],[-103.24957,20.63346],[-103.24947,20.63274],[-103.24818,20.63243],[-103.24823,20.63225],[-103.24774,20.63213],[-103.24766,20.63234],[-103.24716,20.63232],[-103.2471,20.63254],[-103.2463,20.63298],[-103.24624,20.63328],[-103.24656,20.63341],[-103.24704,20.63394],[-103.24682,20.63481],[-103.24369,20.63395],[-103.24367,20.63412],[-103.24242,20.63393],[-103.24251,20.6363],[-103.24199,20.63629],[-103.24157,20.63367],[-103.23954,20.63292],[-103.23757,20.63279],[-103.23687,20.63342],[-103.23647,20.63435],[-103.23713,20.63436],[-103.23692,20.63486],[-103.23724,20.63488],[-103.23706,20.63552],[-103.23821,20.63553],[-103.23803,20.63627],[-103.23917,20.6365],[-103.23911,20.63687],[-103.23799,20.63664],[-103.23783,20.63739],[-103.23996,20.63788],[-103.23994,20.63888],[-103.23667,20.63836],[-103.23674,20.63952],[-103.23636,20.64026],[-103.23477,20.64025],[-103.23462,20.64114],[-103.23243,20.64094],[-103.23194,20.64138],[-103.23144,20.64132],[-103.23116,20.64156],[-103.23046,20.64154],[-103.23036,20.64021],[-103.23049,20.63915],[-103.23098,20.63856],[-103.2316,20.63846],[-103.23169,20.63825],[-103.23127,20.63815],[-103.23115,20.63775],[-103.23214,20.63755],[-103.23272,20.63759],[-103.23352,20.63509],[-103.23064,20.63459],[-103.23058,20.63501],[-103.22876,20.63488],[-103.22697,20.63461],[-103.22699,20.63437],[-103.22587,20.63414],[-103.22585,20.63428],[-103.22555,20.63423],[-103.22556,20.63408],[-103.22493,20.63385],[-103.22464,20.63269],[-103.22474,20.63175],[-103.22615,20.63098],[-103.22638,20.63118],[-103.22659,20.63115],[-103.22665,20.63081],[-103.22624,20.63028],[-103.2257,20.62997],[-103.22451,20.62968],[-103.22413,20.62931],[-103.22613,20.62745],[-103.22598,20.6269],[-103.22649,20.62673],[-103.22659,20.62584],[-103.22691,20.62539],[-103.22781,20.62476],[-103.22804,20.62426],[-103.22793,20.62408],[-103.22822,20.62401],[-103.22922,20.62319],[-103.22953,20.62313],[-103.22982,20.62231],[-103.22967,20.62206],[-103.22867,20.62202],[-103.22727,20.62162],[-103.2292,20.62058],[-103.2299,20.62004],[-103.22933,20.61961],[-103.2285,20.6195],[-103.22774,20.61878],[-103.22781,20.61744],[-103.23552,20.61621],[-103.23559,20.61411],[-103.2334,20.61422],[-103.23324,20.61324],[-103.23339,20.61209],[-103.23585,20.61283],[-103.23631,20.61207],[-103.23735,20.6127],[-103.2376,20.61232],[-103.23721,20.61075],[-103.23866,20.61121],[-103.2395,20.61133],[-103.23979,20.60989],[-103.23976,20.60975],[-103.23913,20.60965],[-103.23901,20.60902],[-103.23912,20.60889],[-103.23895,20.60874],[-103.23896,20.60842],[-103.23747,20.6088],[-103.23753,20.60714],[-103.23741,20.60704],[-103.23754,20.60642],[-103.23723,20.60634],[-103.23677,20.60745],[-103.23516,20.60809],[-103.23461,20.60742],[-103.23438,20.60739],[-103.23389,20.6069],[-103.23362,20.60683],[-103.23351,20.60584],[-103.23332,20.60553],[-103.23325,20.60485],[-103.23294,20.60446],[-103.23298,20.60424],[-103.23183,20.60404],[-103.23171,20.60457],[-103.23108,20.60443],[-103.23116,20.60391],[-103.2303,20.60377],[-103.23044,20.60398],[-103.22928,20.60478],[-103.22811,20.60422],[-103.22853,20.60355],[-103.22783,20.60333],[-103.22758,20.60439],[-103.22668,20.60422],[-103.22705,20.60264],[-103.22731,20.60247],[-103.22755,20.60158],[-103.22561,20.60118],[-103.22466,20.60141],[-103.22476,20.60102],[-103.22394,20.60098],[-103.2202,20.60155],[-103.221,20.59993],[-103.22155,20.59939],[-103.2201,20.59883],[-103.21952,20.59882],[-103.22021,20.59705],[-103.22015,20.59647],[-103.21963,20.59617],[-103.21953,20.59682],[-103.21751,20.59688],[-103.21531,20.59555],[-103.21455,20.59362],[-103.21486,20.59328],[-103.21476,20.59282],[-103.21391,20.59262],[-103.21533,20.59244],[-103.21577,20.5905],[-103.21674,20.59078],[-103.21688,20.58963],[-103.21591,20.58994],[-103.2159,20.588],[-103.21575,20.58799],[-103.21565,20.5867],[-103.21613,20.58672],[-103.21632,20.58557],[-103.21629,20.58449],[-103.21641,20.58434],[-103.2181,20.58368],[-103.21685,20.58096],[-103.21727,20.5803],[-103.21931,20.57859],[-103.22081,20.57781],[-103.2216,20.57679],[-103.22287,20.57782],[-103.22391,20.577],[-103.2252,20.57822],[-103.2248,20.57847],[-103.22872,20.57758],[-103.22848,20.57706],[-103.22813,20.57685],[-103.2282,20.57646],[-103.22791,20.57603],[-103.22712,20.57561],[-103.22721,20.57532],[-103.2269,20.57539],[-103.22692,20.57476],[-103.22707,20.57467],[-103.22724,20.57402],[-103.22722,20.57369],[-103.22687,20.57355],[-103.22701,20.57273],[-103.22644,20.57281],[-103.22646,20.57264],[-103.2268,20.57265],[-103.22676,20.57226],[-103.22599,20.5725],[-103.22566,20.5723],[-103.22565,20.57269],[-103.22535,20.57256],[-103.22549,20.57224],[-103.22498,20.57227],[-103.22494,20.57199],[-103.22513,20.57165],[-103.22447,20.57058],[-103.22459,20.56975],[-103.22394,20.5696],[-103.22431,20.56933],[-103.22403,20.56813],[-103.22414,20.56732],[-103.22887,20.56967],[-103.22899,20.57054],[-103.23103,20.57078],[-103.23086,20.57218],[-103.23164,20.57225],[-103.23159,20.57314],[-103.23375,20.5732],[-103.23369,20.57266],[-103.23418,20.57256],[-103.23382,20.57041],[-103.23452,20.57045],[-103.23683,20.56975],[-103.23678,20.56933],[-103.23749,20.5692],[-103.23744,20.56895],[-103.23814,20.56881],[-103.23798,20.5683],[-103.2388,20.56802],[-103.23914,20.56768],[-103.23962,20.56748],[-103.2406,20.56947],[-103.24124,20.57033],[-103.24013,20.57071],[-103.23989,20.57115],[-103.23924,20.57132],[-103.23871,20.57188],[-103.23936,20.57396],[-103.24123,20.57757],[-103.24118,20.5809],[-103.24031,20.58085],[-103.24036,20.58318],[-103.24191,20.58319],[-103.25632,20.58715],[-103.25688,20.58455],[-103.26009,20.58758],[-103.25996,20.58823],[-103.25875,20.58792],[-103.25752,20.59084],[-103.25801,20.59099],[-103.25824,20.59032],[-103.2588,20.59049],[-103.25913,20.59174],[-103.25842,20.59172],[-103.2578,20.59146],[-103.2572,20.59595],[-103.25743,20.59598],[-103.25711,20.59792],[-103.25754,20.59826],[-103.25689,20.59917],[-103.2566,20.59917],[-103.25649,20.6005],[-103.25701,20.60074],[-103.25643,20.60137],[-103.25608,20.60238],[-103.25645,20.60417],[-103.2564,20.60521],[-103.25712,20.60689],[-103.25718,20.60737],[-103.25714,20.61034],[-103.25728,20.61183],[-103.25934,20.61195],[-103.26055,20.61178],[-103.2662,20.61173],[-103.27575,20.61185],[-103.27632,20.61194],[-103.27607,20.61341],[-103.28025,20.61358],[-103.28294,20.61304],[-103.28413,20.61492],[-103.28401,20.61577],[-103.28348,20.61623],[-103.28204,20.61634],[-103.28209,20.61653],[-103.28258,20.61648],[-103.28134,20.62357],[-103.28138,20.62407],[-103.28487,20.62564],[-103.28569,20.6258],[-103.28673,20.62626],[-103.28547,20.62852],[-103.28531,20.62909],[-103.28534,20.63103],[-103.28388,20.63622],[-103.2831,20.63973],[-103.28221,20.64122],[-103.28067,20.6411],[-103.2794,20.64256],[-103.27889,20.64283],[-103.27786,20.64375],[-103.27749,20.64391],[-103.27629,20.64396],[-103.2754,20.64417],[-103.27449,20.64506],[-103.27357,20.64539],[-103.27284,20.64599],[-103.27008,20.64506],[-103.26979,20.64499],[-103.26966,20.64514],[-103.27013,20.64632],[-103.27083,20.6473],[-103.27064,20.64805],[-103.27012,20.64795],[-103.27004,20.64823],[-103.27032,20.64843],[-103.27029,20.64891],[-103.26988,20.64932],[-103.26907,20.65321],[-103.26748,20.655],[-103.2674,20.65528],[-103.26769,20.65877],[-103.26813,20.66],[-103.26775,20.66194],[-103.26771,20.66405],[-103.26559,20.66702],[-103.26408,20.66774],[-103.26376,20.66849],[-103.26418,20.6702],[-103.26401,20.67164],[-103.26469,20.67415],[-103.2647,20.67545],[-103.26582,20.67744],[-103.26703,20.67642],[-103.26729,20.67647],[-103.26798,20.67805],[-103.26747,20.67891],[-103.26778,20.67919],[-103.26725,20.67979],[-103.26727,20.68022],[-103.26755,20.68058],[-103.26736,20.68095],[-103.26738,20.68128],[-103.26675,20.68144],[-103.26645,20.68186],[-103.26757,20.68208],[-103.26802,20.68318],[-103.26798,20.68372],[-103.26889,20.68595],[-103.26898,20.68777],[-103.26934,20.68841],[-103.27027,20.68922],[-103.27059,20.68978],[-103.27057,20.69081],[-103.27035,20.69141],[-103.27042,20.69389],[-103.26998,20.69365],[-103.26977,20.6948],[-103.26987,20.6951],[-103.27039,20.69559],[-103.26663,20.69711],[-103.26588,20.69704],[-103.26547,20.69698],[-103.26424,20.69616],[-103.26341,20.69598],[-103.26104,20.6944],[-103.26038,20.69344]]], "type": "Polygon"}, "id": "2", "properties": {"CVEGEO": "141010001", "NOMGEO": "Tonal\u00e1", "__folium_color": "#e7298a"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-103.42916,20.78578],[-103.42941,20.78497],[-103.42957,20.78497],[-103.42964,20.78429],[-103.42697,20.78443],[-103.42387,20.78425],[-103.42386,20.78264],[-103.42447,20.78224],[-103.42426,20.78169],[-103.42433,20.78153],[-103.42507,20.78142],[-103.42459,20.78131],[-103.42455,20.78119],[-103.42311,20.78135],[-103.42192,20.78082],[-103.42138,20.781],[-103.42095,20.78069],[-103.42022,20.78084],[-103.41934,20.78073],[-103.42025,20.77942],[-103.42082,20.77786],[-103.42201,20.77733],[-103.4234,20.77717],[-103.42291,20.7761],[-103.42284,20.77518],[-103.42263,20.77491],[-103.42076,20.77619],[-103.41945,20.77571],[-103.41887,20.77782],[-103.41813,20.77769],[-103.41858,20.77574],[-103.4183,20.77564],[-103.41761,20.77585],[-103.41744,20.77618],[-103.41744,20.77683],[-103.41704,20.77751],[-103.41717,20.77824],[-103.41655,20.77908],[-103.41709,20.78],[-103.41712,20.78027],[-103.41703,20.78045],[-103.41534,20.78158],[-103.41484,20.78241],[-103.41489,20.783],[-103.41454,20.7837],[-103.41373,20.78374],[-103.41364,20.78268],[-103.41265,20.7825],[-103.41246,20.78231],[-103.41249,20.77866],[-103.41273,20.77758],[-103.41285,20.77474],[-103.41696,20.77205],[-103.41696,20.77162],[-103.4173,20.77086],[-103.41754,20.77058],[-103.41808,20.77034],[-103.41891,20.76817],[-103.41714,20.76632],[-103.41644,20.76706],[-103.4167,20.7675],[-103.41637,20.76824],[-103.41669,20.76834],[-103.41638,20.76873],[-103.41489,20.76851],[-103.41275,20.76753],[-103.4152,20.76507],[-103.41562,20.7649],[-103.41595,20.76532],[-103.41641,20.76483],[-103.41663,20.765],[-103.41705,20.76455],[-103.41667,20.7641],[-103.41689,20.76342],[-103.41688,20.76293],[-103.41626,20.76167],[-103.41492,20.76066],[-103.4146,20.76058],[-103.41437,20.75993],[-103.41346,20.76007],[-103.41262,20.75974],[-103.4117,20.75965],[-103.4111,20.75905],[-103.4108,20.75898],[-103.41094,20.75854],[-103.41068,20.75799],[-103.41109,20.75777],[-103.41292,20.75733],[-103.41322,20.75744],[-103.4136,20.75794],[-103.41413,20.75799],[-103.41453,20.75773],[-103.41529,20.75759],[-103.41369,20.75677],[-103.41327,20.75671],[-103.41224,20.75695],[-103.41171,20.75677],[-103.41105,20.75626],[-103.40937,20.75596],[-103.41042,20.75441],[-103.40941,20.75339],[-103.40922,20.75333],[-103.40927,20.7539],[-103.40801,20.75433],[-103.40801,20.75538],[-103.40764,20.75555],[-103.40698,20.75618],[-103.40684,20.75656],[-103.40627,20.75652],[-103.40632,20.75791],[-103.40728,20.75789],[-103.40727,20.75829],[-103.40606,20.75888],[-103.40686,20.76246],[-103.40563,20.76229],[-103.40546,20.76181],[-103.4043,20.76158],[-103.40245,20.76173],[-103.40234,20.76191],[-103.40495,20.7634],[-103.40513,20.76385],[-103.40499,20.76439],[-103.40586,20.76489],[-103.40671,20.76491],[-103.40696,20.76478],[-103.40705,20.76594],[-103.4046,20.7654],[-103.40469,20.76735],[-103.40825,20.76767],[-103.40894,20.76791],[-103.40952,20.7685],[-103.40926,20.76911],[-103.40871,20.76954],[-103.4086,20.76979],[-103.40895,20.76981],[-103.40819,20.7704],[-103.4076,20.77037],[-103.40759,20.76995],[-103.40734,20.7694],[-103.40765,20.76856],[-103.40747,20.76836],[-103.40684,20.76874],[-103.40641,20.76939],[-103.40594,20.76941],[-103.40583,20.76938],[-103.40587,20.76908],[-103.40612,20.76885],[-103.40605,20.76858],[-103.4059,20.76838],[-103.40545,20.76837],[-103.40449,20.76917],[-103.40426,20.76926],[-103.40406,20.76903],[-103.40246,20.76962],[-103.40192,20.77052],[-103.39908,20.77225],[-103.39925,20.77229],[-103.39976,20.77373],[-103.3998,20.77469],[-103.40012,20.77486],[-103.40034,20.7757],[-103.4006,20.77601],[-103.40058,20.77636],[-103.40194,20.77593],[-103.40205,20.77617],[-103.40225,20.77614],[-103.40229,20.7763],[-103.40246,20.77631],[-103.40254,20.77703],[-103.40223,20.77766],[-103.40242,20.778],[-103.40347,20.77792],[-103.40412,20.77766],[-103.40555,20.77807],[-103.40551,20.7783],[-103.40445,20.77878],[-103.40445,20.7796],[-103.40522,20.77985],[-103.4048,20.78111],[-103.40291,20.78019],[-103.40261,20.78048],[-103.40207,20.78064],[-103.40204,20.78092],[-103.40237,20.78106],[-103.40145,20.7831],[-103.40266,20.78358],[-103.40271,20.78272],[-103.40329,20.78289],[-103.40319,20.78318],[-103.40338,20.7847],[-103.40302,20.78517],[-103.40305,20.78548],[-103.40335,20.78589],[-103.40329,20.78645],[-103.40294,20.7865],[-103.40293,20.78637],[-103.40234,20.78658],[-103.40231,20.78639],[-103.4019,20.78613],[-103.40173,20.78702],[-103.40114,20.78741],[-103.40067,20.78743],[-103.40069,20.78691],[-103.40012,20.78687],[-103.40017,20.78608],[-103.39909,20.78608],[-103.39909,20.78499],[-103.39855,20.78499],[-103.39858,20.78435],[-103.39917,20.78433],[-103.3993,20.78186],[-103.39892,20.78188],[-103.39889,20.78132],[-103.39865,20.78127],[-103.39869,20.78108],[-103.39488,20.78057],[-103.39552,20.78023],[-103.39681,20.77865],[-103.39711,20.77863],[-103.39727,20.77843],[-103.39687,20.77769],[-103.39696,20.77743],[-103.39723,20.77753],[-103.39792,20.77693],[-103.39747,20.77605],[-103.39767,20.776],[-103.39774,20.7755],[-103.39759,20.7753],[-103.39779,20.77517],[-103.39761,20.77494],[-103.39722,20.77509],[-103.39711,20.77489],[-103.39746,20.77432],[-103.39665,20.77363],[-103.39688,20.77325],[-103.39743,20.77337],[-103.39751,20.77268],[-103.39787,20.77232],[-103.39753,20.77244],[-103.39733,20.77203],[-103.39679,20.77203],[-103.39612,20.77294],[-103.39463,20.77382],[-103.39411,20.77429],[-103.39395,20.77489],[-103.39375,20.77492],[-103.39365,20.77474],[-103.39411,20.77305],[-103.39412,20.7722],[-103.39376,20.7718],[-103.39329,20.76936],[-103.39192,20.76976],[-103.39169,20.7702],[-103.39125,20.77031],[-103.39072,20.77021],[-103.39059,20.76978],[-103.3904,20.76975],[-103.39015,20.77016],[-103.38968,20.77033],[-103.38908,20.77013],[-103.38899,20.7695],[-103.38857,20.76965],[-103.38759,20.76935],[-103.38719,20.7689],[-103.38637,20.76858],[-103.38621,20.76879],[-103.38564,20.76851],[-103.38317,20.7686],[-103.38319,20.76899],[-103.38162,20.76981],[-103.38094,20.7699],[-103.38088,20.7693],[-103.38006,20.76824],[-103.37985,20.76741],[-103.38017,20.76676],[-103.38133,20.76563],[-103.38249,20.76305],[-103.38261,20.76003],[-103.38125,20.76034],[-103.37901,20.76117],[-103.37744,20.76047],[-103.37766,20.75888],[-103.37844,20.75586],[-103.3769,20.75673],[-103.37252,20.75863],[-103.37231,20.75852],[-103.37137,20.75921],[-103.3667,20.76124],[-103.36658,20.7617],[-103.36962,20.76521],[-103.37038,20.76594],[-103.37064,20.76576],[-103.37087,20.76604],[-103.37061,20.76622],[-103.37132,20.76697],[-103.37335,20.76673],[-103.37485,20.76723],[-103.37522,20.76704],[-103.37721,20.76962],[-103.37675,20.76997],[-103.37985,20.77031],[-103.37982,20.77158],[-103.38041,20.77163],[-103.38035,20.77314],[-103.38109,20.77325],[-103.38184,20.77308],[-103.3812,20.77403],[-103.38021,20.77473],[-103.37982,20.77576],[-103.37924,20.77609],[-103.38031,20.77816],[-103.37822,20.77886],[-103.37719,20.77892],[-103.37748,20.77914],[-103.37739,20.77936],[-103.3763,20.78025],[-103.37535,20.77999],[-103.37354,20.78037],[-103.37283,20.7808],[-103.3718,20.78195],[-103.37048,20.78186],[-103.36838,20.78144],[-103.36723,20.78188],[-103.36477,20.78329],[-103.36514,20.78408],[-103.36474,20.7846],[-103.36411,20.78414],[-103.36404,20.78444],[-103.36495,20.7867],[-103.36344,20.78732],[-103.36244,20.78851],[-103.36089,20.7889],[-103.36002,20.78895],[-103.35894,20.78963],[-103.35686,20.79061],[-103.35592,20.79054],[-103.35547,20.78969],[-103.35519,20.78945],[-103.35473,20.78938],[-103.35453,20.78968],[-103.35433,20.78972],[-103.35404,20.78916],[-103.3533,20.78915],[-103.35413,20.78854],[-103.35424,20.78821],[-103.35417,20.78715],[-103.35379,20.78662],[-103.35066,20.78496],[-103.34837,20.78427],[-103.34761,20.78415],[-103.34718,20.78424],[-103.34713,20.78384],[-103.34869,20.78227],[-103.34969,20.78173],[-103.35,20.78126],[-103.35037,20.78101],[-103.35125,20.78095],[-103.35175,20.78073],[-103.35242,20.78078],[-103.35277,20.78094],[-103.3535,20.78078],[-103.35325,20.78063],[-103.35296,20.77968],[-103.35233,20.77939],[-103.3522,20.77965],[-103.35077,20.7795],[-103.34991,20.77857],[-103.3494,20.77867],[-103.34951,20.77908],[-103.34899,20.77929],[-103.34874,20.77868],[-103.34789,20.77902],[-103.34772,20.7784],[-103.34743,20.77855],[-103.34718,20.77779],[-103.34635,20.77735],[-103.3462,20.7777],[-103.34571,20.77789],[-103.34519,20.7778],[-103.34518,20.77798],[-103.34486,20.77807],[-103.34443,20.77727],[-103.34443,20.77681],[-103.34508,20.77563],[-103.34376,20.77526],[-103.34362,20.77552],[-103.34271,20.77487],[-103.34253,20.77546],[-103.34178,20.77519],[-103.3412,20.7749],[-103.34155,20.77414],[-103.34122,20.77413],[-103.34073,20.77366],[-103.33978,20.77409],[-103.33911,20.77471],[-103.33756,20.77351],[-103.33715,20.77272],[-103.33728,20.77205],[-103.33789,20.7715],[-103.33974,20.77109],[-103.34025,20.77035],[-103.3403,20.7698],[-103.3389,20.77052],[-103.33805,20.77037],[-103.3374,20.77005],[-103.33675,20.77],[-103.33622,20.76964],[-103.33615,20.77227],[-103.33688,20.77369],[-103.33744,20.77406],[-103.33767,20.7748],[-103.33767,20.77575],[-103.33784,20.77582],[-103.33749,20.77602],[-103.33618,20.77602],[-103.33477,20.77581],[-103.33446,20.77512],[-103.33414,20.77489],[-103.33356,20.77481],[-103.33348,20.77491],[-103.33256,20.77469],[-103.33244,20.77447],[-103.33214,20.77439],[-103.3323,20.77396],[-103.33285,20.77335],[-103.33291,20.77307],[-103.33268,20.77257],[-103.33299,20.77179],[-103.33303,20.77119],[-103.33333,20.77075],[-103.33327,20.77049],[-103.33352,20.76989],[-103.33378,20.76984],[-103.33364,20.7696],[-103.33381,20.76932],[-103.33403,20.76777],[-103.33358,20.76825],[-103.33188,20.76905],[-103.33065,20.76825],[-103.33046,20.76788],[-103.33018,20.76775],[-103.32995,20.76777],[-103.32929,20.76828],[-103.32898,20.76824],[-103.32862,20.76774],[-103.32855,20.76724],[-103.32776,20.76709],[-103.32765,20.76732],[-103.3274,20.76719],[-103.32713,20.76674],[-103.32722,20.76481],[-103.32707,20.76456],[-103.32685,20.7644],[-103.32625,20.76444],[-103.32624,20.76427],[-103.32488,20.76421],[-103.32486,20.76395],[-103.3254,20.76353],[-103.32538,20.7633],[-103.32501,20.76307],[-103.32477,20.76262],[-103.32447,20.76247],[-103.32396,20.76249],[-103.32225,20.7632],[-103.32269,20.76261],[-103.32411,20.76206],[-103.32416,20.76093],[-103.32361,20.76083],[-103.32354,20.76002],[-103.32331,20.7597],[-103.32227,20.75934],[-103.32193,20.75945],[-103.32146,20.75833],[-103.32249,20.75809],[-103.32308,20.75755],[-103.32559,20.75758],[-103.32577,20.75626],[-103.32527,20.75621],[-103.32471,20.7547],[-103.32357,20.7545],[-103.3225,20.75584],[-103.32207,20.75588],[-103.32077,20.75416],[-103.32115,20.75382],[-103.32256,20.75337],[-103.32391,20.75247],[-103.32514,20.75197],[-103.32486,20.7515],[-103.32538,20.75083],[-103.32608,20.75039],[-103.3268,20.75034],[-103.32895,20.75105],[-103.32999,20.75163],[-103.33053,20.75203],[-103.33052,20.7522],[-103.33098,20.75225],[-103.33141,20.7497],[-103.33116,20.74944],[-103.33119,20.74739],[-103.3326,20.7464],[-103.33305,20.74584],[-103.33308,20.74563],[-103.33241,20.74494],[-103.33251,20.74318],[-103.33302,20.74263],[-103.33323,20.74171],[-103.33238,20.74238],[-103.3303,20.74332],[-103.32989,20.74338],[-103.33,20.74376],[-103.32984,20.74413],[-103.32946,20.74435],[-103.32865,20.74428],[-103.32792,20.74353],[-103.32737,20.74333],[-103.32715,20.74218],[-103.3265,20.74145],[-103.3262,20.73885],[-103.3256,20.73752],[-103.32571,20.73697],[-103.32646,20.73632],[-103.32668,20.73526],[-103.32809,20.73497],[-103.32844,20.73466],[-103.32895,20.73339],[-103.32891,20.73262],[-103.32907,20.73207],[-103.32968,20.73124],[-103.33007,20.72952],[-103.33117,20.72841],[-103.33233,20.72823],[-103.33297,20.72759],[-103.33346,20.72764],[-103.33416,20.72824],[-103.33439,20.72816],[-103.33475,20.72782],[-103.33457,20.72747],[-103.33486,20.72632],[-103.3357,20.72541],[-103.33842,20.72405],[-103.3392,20.72395],[-103.34092,20.72316],[-103.34107,20.7222],[-103.34159,20.72162],[-103.34156,20.72031],[-103.34169,20.72002],[-103.34314,20.71913],[-103.34345,20.71821],[-103.34423,20.71748],[-103.34425,20.71635],[-103.34456,20.71604],[-103.34578,20.71591],[-103.3466,20.71642],[-103.34738,20.71725],[-103.34839,20.7168],[-103.35011,20.7166],[-103.3531,20.71513],[-103.35597,20.71568],[-103.35632,20.71564],[-103.35845,20.71417],[-103.36244,20.71288],[-103.37016,20.7134],[-103.37081,20.71384],[-103.37139,20.71391],[-103.3741,20.7133],[-103.37553,20.71256],[-103.37518,20.71234],[-103.37566,20.71199],[-103.38034,20.7112],[-103.38074,20.71175],[-103.38128,20.71138],[-103.38698,20.71018],[-103.39045,20.70969],[-103.39141,20.70972],[-103.39203,20.70995],[-103.39451,20.71183],[-103.39565,20.71226],[-103.39687,20.71213],[-103.39999,20.71116],[-103.40091,20.71102],[-103.40377,20.71154],[-103.40471,20.71202],[-103.40551,20.71211],[-103.40602,20.71194],[-103.40658,20.71122],[-103.40694,20.70966],[-103.40248,20.70387],[-103.40303,20.70281],[-103.40315,20.70202],[-103.40186,20.70092],[-103.40177,20.69951],[-103.40124,20.69924],[-103.40015,20.69956],[-103.3995,20.69936],[-103.39949,20.69921],[-103.39975,20.69796],[-103.40138,20.69653],[-103.40141,20.69636],[-103.40112,20.69602],[-103.40259,20.69505],[-103.40264,20.6947],[-103.40235,20.69423],[-103.40425,20.69331],[-103.40511,20.69256],[-103.40423,20.69177],[-103.40364,20.69197],[-103.40337,20.69126],[-103.4031,20.69109],[-103.40256,20.69098],[-103.40086,20.69179],[-103.39948,20.69186],[-103.39815,20.69087],[-103.39856,20.69013],[-103.39856,20.68986],[-103.40069,20.68736],[-103.40137,20.68707],[-103.40084,20.68175],[-103.40159,20.68162],[-103.40186,20.68139],[-103.4031,20.68126],[-103.40309,20.68156],[-103.40367,20.68154],[-103.40368,20.67795],[-103.40248,20.67812],[-103.40274,20.67488],[-103.40015,20.67447],[-103.40006,20.67381],[-103.39999,20.67139],[-103.40037,20.67135],[-103.401,20.67049],[-103.40274,20.66765],[-103.40284,20.66696],[-103.40212,20.66659],[-103.40217,20.66596],[-103.40254,20.66573],[-103.40186,20.66411],[-103.40067,20.66221],[-103.39929,20.66079],[-103.39737,20.65937],[-103.3988,20.6572],[-103.39793,20.65688],[-103.39691,20.65603],[-103.39356,20.65485],[-103.3939,20.65465],[-103.39353,20.65387],[-103.3993,20.65054],[-103.39848,20.64926],[-103.39837,20.64697],[-103.39871,20.64546],[-103.39992,20.64294],[-103.39786,20.64182],[-103.39693,20.64182],[-103.39612,20.6422],[-103.39515,20.64225],[-103.39711,20.63794],[-103.3971,20.63735],[-103.39664,20.63656],[-103.39791,20.63538],[-103.40076,20.63352],[-103.40411,20.62106],[-103.40361,20.62079],[-103.40044,20.62131],[-103.40049,20.62098],[-103.40032,20.62062],[-103.40178,20.61957],[-103.40493,20.61917],[-103.40762,20.62044],[-103.40837,20.62093],[-103.40849,20.62022],[-103.40864,20.62011],[-103.41044,20.62016],[-103.4111,20.61964],[-103.4119,20.6179],[-103.41721,20.61612],[-103.42298,20.61982],[-103.42307,20.6199],[-103.42285,20.62031],[-103.42312,20.62044],[-103.42588,20.61622],[-103.42587,20.61573],[-103.42467,20.61343],[-103.4228,20.61237],[-103.42165,20.612],[-103.42186,20.61076],[-103.41989,20.60866],[-103.41955,20.60678],[-103.41907,20.60552],[-103.42029,20.60026],[-103.42034,20.59943],[-103.41999,20.58955],[-103.41823,20.58862],[-103.42351,20.58479],[-103.42383,20.58575],[-103.43094,20.58818],[-103.43092,20.58783],[-103.4352,20.58963],[-103.4412,20.59169],[-103.44138,20.59203],[-103.44192,20.59192],[-103.44212,20.59162],[-103.44549,20.59289],[-103.4472,20.59319],[-103.44816,20.59362],[-103.44868,20.59423],[-103.44886,20.59486],[-103.44871,20.59668],[-103.45097,20.59639],[-103.45322,20.59917],[-103.45408,20.60084],[-103.45544,20.60194],[-103.45443,20.60234],[-103.45467,20.60272],[-103.45454,20.60305],[-103.45558,20.6033],[-103.4563,20.60449],[-103.45605,20.6048],[-103.45398,20.60526],[-103.45394,20.60542],[-103.45455,20.60677],[-103.45553,20.60734],[-103.45581,20.60735],[-103.45753,20.60641],[-103.45829,20.60614],[-103.45851,20.60627],[-103.4584,20.60652],[-103.45723,20.60709],[-103.45691,20.60754],[-103.45684,20.60813],[-103.45697,20.6083],[-103.45716,20.60823],[-103.45751,20.60764],[-103.459,20.60725],[-103.45968,20.60747],[-103.45981,20.60767],[-103.45974,20.608],[-103.46012,20.60801],[-103.46024,20.60816],[-103.46106,20.60786],[-103.46137,20.60804],[-103.46192,20.60772],[-103.46219,20.60771],[-103.4624,20.60793],[-103.46288,20.60787],[-103.46348,20.60819],[-103.46361,20.60871],[-103.46438,20.60827],[-103.46519,20.60856],[-103.46555,20.60847],[-103.46604,20.60882],[-103.46619,20.60995],[-103.4674,20.61003],[-103.4675,20.60983],[-103.46809,20.60976],[-103.46828,20.60991],[-103.46926,20.61002],[-103.47033,20.60975],[-103.47094,20.61006],[-103.47213,20.60858],[-103.47318,20.60811],[-103.47428,20.60825],[-103.47449,20.60747],[-103.47487,20.60736],[-103.47503,20.60688],[-103.47507,20.60496],[-103.47681,20.60447],[-103.47714,20.60516],[-103.47754,20.6049],[-103.47806,20.60527],[-103.47852,20.60479],[-103.4794,20.60564],[-103.47959,20.60557],[-103.48013,20.60577],[-103.48037,20.60558],[-103.4809,20.60573],[-103.4816,20.60815],[-103.48148,20.60865],[-103.4817,20.60871],[-103.48192,20.60814],[-103.48256,20.60749],[-103.48359,20.60749],[-103.48343,20.61107],[-103.48241,20.61121],[-103.47872,20.61549],[-103.47753,20.61655],[-103.47675,20.6169],[-103.47733,20.61799],[-103.47671,20.62055],[-103.47797,20.62012],[-103.47739,20.62167],[-103.47852,20.62187],[-103.47876,20.62067],[-103.48062,20.62053],[-103.48086,20.62078],[-103.48117,20.62169],[-103.48141,20.62183],[-103.48234,20.62152],[-103.48224,20.62103],[-103.48268,20.61904],[-103.48405,20.61931],[-103.48345,20.62164],[-103.48298,20.62172],[-103.4827,20.62308],[-103.48339,20.62321],[-103.48235,20.6274],[-103.4834,20.6277],[-103.48613,20.62797],[-103.48551,20.62874],[-103.48424,20.62903],[-103.48341,20.63008],[-103.48476,20.63037],[-103.48607,20.63097],[-103.48582,20.63157],[-103.48497,20.63279],[-103.48397,20.63234],[-103.4843,20.63168],[-103.48408,20.6316],[-103.48278,20.6343],[-103.48446,20.63557],[-103.48453,20.63541],[-103.48476,20.63562],[-103.48495,20.63627],[-103.48466,20.63708],[-103.48412,20.63691],[-103.4838,20.63781],[-103.4824,20.63728],[-103.48208,20.638],[-103.48296,20.63825],[-103.48303,20.63865],[-103.48358,20.63884],[-103.48351,20.63913],[-103.48263,20.63903],[-103.48275,20.63873],[-103.48261,20.63868],[-103.48186,20.63881],[-103.48188,20.63843],[-103.48127,20.63825],[-103.48052,20.63872],[-103.48104,20.6389],[-103.48098,20.63926],[-103.48034,20.63946],[-103.48028,20.63971],[-103.48032,20.63992],[-103.48055,20.63989],[-103.48064,20.64086],[-103.48104,20.64126],[-103.4816,20.64231],[-103.48172,20.64199],[-103.48193,20.64193],[-103.48262,20.64246],[-103.4825,20.64209],[-103.48275,20.64194],[-103.48378,20.64218],[-103.48409,20.64265],[-103.48403,20.64318],[-103.48381,20.64335],[-103.48322,20.64337],[-103.48282,20.64362],[-103.48258,20.64359],[-103.48152,20.6445],[-103.48128,20.64436],[-103.48122,20.64404],[-103.48085,20.64404],[-103.48061,20.64419],[-103.47946,20.64393],[-103.47836,20.64348],[-103.47826,20.64391],[-103.47854,20.64398],[-103.47859,20.64438],[-103.47897,20.64481],[-103.47978,20.64522],[-103.48009,20.64604],[-103.48048,20.64635],[-103.48048,20.64577],[-103.48176,20.64584],[-103.48187,20.64641],[-103.48149,20.64659],[-103.48154,20.64669],[-103.48328,20.6481],[-103.48374,20.64866],[-103.48401,20.64917],[-103.48366,20.64948],[-103.48387,20.64988],[-103.48353,20.65013],[-103.48379,20.65033],[-103.48338,20.65099],[-103.48299,20.6508],[-103.48285,20.65149],[-103.48207,20.65143],[-103.48155,20.65155],[-103.4805,20.65124],[-103.48012,20.65157],[-103.47928,20.65181],[-103.47776,20.65186],[-103.47756,20.65167],[-103.4773,20.65179],[-103.47688,20.65166],[-103.4771,20.65108],[-103.47671,20.65063],[-103.47531,20.65021],[-103.47467,20.65035],[-103.47491,20.65046],[-103.47493,20.65065],[-103.47447,20.65104],[-103.47405,20.65053],[-103.47423,20.65009],[-103.47289,20.64873],[-103.47239,20.6485],[-103.47062,20.64827],[-103.47,20.64859],[-103.46917,20.6487],[-103.46797,20.6491],[-103.46643,20.64894],[-103.46477,20.64857],[-103.46429,20.64867],[-103.46337,20.64855],[-103.46231,20.64882],[-103.46057,20.64978],[-103.46007,20.65028],[-103.45927,20.65158],[-103.45905,20.65242],[-103.45875,20.65278],[-103.45776,20.65301],[-103.45748,20.65281],[-103.45735,20.65326],[-103.45633,20.65384],[-103.45532,20.65514],[-103.45484,20.65642],[-103.45495,20.65738],[-103.45584,20.65991],[-103.45615,20.66153],[-103.4567,20.66161],[-103.45704,20.66325],[-103.45759,20.66387],[-103.45778,20.66385],[-103.45815,20.66413],[-103.45658,20.66516],[-103.45761,20.6649],[-103.45871,20.66488],[-103.46012,20.66509],[-103.46135,20.66501],[-103.4615,20.66439],[-103.46339,20.66466],[-103.46334,20.66569],[-103.46469,20.66552],[-103.46502,20.66659],[-103.46541,20.6671],[-103.46521,20.66975],[-103.46568,20.66953],[-103.46776,20.66978],[-103.46742,20.67027],[-103.47042,20.67036],[-103.47082,20.68051],[-103.47043,20.68058],[-103.47081,20.68235],[-103.47004,20.68256],[-103.47048,20.68353],[-103.47027,20.68597],[-103.47144,20.68609],[-103.47259,20.68593],[-103.47284,20.68724],[-103.47455,20.68741],[-103.47457,20.68813],[-103.47471,20.68838],[-103.47556,20.68805],[-103.4768,20.68969],[-103.47567,20.68993],[-103.47619,20.69159],[-103.47342,20.69307],[-103.47303,20.691],[-103.46645,20.69529],[-103.46607,20.69754],[-103.46651,20.69713],[-103.46732,20.69705],[-103.46719,20.69867],[-103.46941,20.69866],[-103.46977,20.69636],[-103.4696,20.6959],[-103.47236,20.6963],[-103.4723,20.69806],[-103.47341,20.69788],[-103.47349,20.69939],[-103.47308,20.69951],[-103.47372,20.70079],[-103.47525,20.70085],[-103.47538,20.7035],[-103.47362,20.70362],[-103.47351,20.70593],[-103.47217,20.7059],[-103.47216,20.70505],[-103.47043,20.70489],[-103.4704,20.70458],[-103.47001,20.70458],[-103.46993,20.70298],[-103.4684,20.70378],[-103.46621,20.70443],[-103.46494,20.70475],[-103.46418,20.70457],[-103.46577,20.70596],[-103.467,20.70611],[-103.46808,20.7069],[-103.46831,20.70726],[-103.47003,20.70819],[-103.47086,20.70888],[-103.47177,20.7087],[-103.47207,20.70878],[-103.47311,20.70827],[-103.4732,20.70802],[-103.47507,20.70791],[-103.47543,20.70857],[-103.47558,20.70853],[-103.47679,20.71024],[-103.47492,20.71079],[-103.47466,20.71201],[-103.47232,20.71236],[-103.47192,20.71379],[-103.47187,20.71475],[-103.47157,20.71546],[-103.47527,20.71649],[-103.47836,20.7177],[-103.4789,20.71756],[-103.48003,20.72026],[-103.47967,20.72167],[-103.47759,20.72134],[-103.47751,20.72195],[-103.47503,20.72169],[-103.4734,20.72111],[-103.47225,20.7189],[-103.47208,20.71918],[-103.46758,20.71789],[-103.46639,20.71741],[-103.46442,20.71629],[-103.46418,20.71786],[-103.46569,20.71877],[-103.46514,20.72183],[-103.46733,20.72243],[-103.46726,20.72289],[-103.46947,20.72334],[-103.46925,20.72466],[-103.4759,20.72549],[-103.47583,20.7293],[-103.47124,20.72888],[-103.47109,20.73201],[-103.46944,20.73167],[-103.46909,20.7338],[-103.46762,20.73367],[-103.46815,20.72929],[-103.46185,20.72783],[-103.4622,20.72631],[-103.45945,20.72607],[-103.4594,20.7265],[-103.45786,20.72642],[-103.45717,20.72976],[-103.45818,20.72998],[-103.45762,20.73227],[-103.46083,20.73298],[-103.46105,20.73178],[-103.46392,20.73248],[-103.46361,20.7336],[-103.46957,20.73472],[-103.46849,20.74182],[-103.4612,20.73914],[-103.46105,20.73944],[-103.46085,20.74177],[-103.46072,20.74183],[-103.45764,20.73825],[-103.45203,20.73744],[-103.45174,20.73962],[-103.45098,20.74994],[-103.46335,20.75049],[-103.46357,20.74914],[-103.46705,20.74933],[-103.46684,20.75072],[-103.46978,20.75069],[-103.47071,20.75091],[-103.47399,20.75101],[-103.47478,20.75068],[-103.47558,20.75056],[-103.47593,20.75101],[-103.47811,20.75112],[-103.47803,20.75178],[-103.47306,20.75149],[-103.47297,20.7522],[-103.47107,20.7521],[-103.47112,20.75144],[-103.46923,20.75126],[-103.46893,20.75271],[-103.46725,20.75426],[-103.46828,20.75526],[-103.46958,20.75567],[-103.47163,20.75593],[-103.47156,20.75694],[-103.47257,20.7574],[-103.47198,20.7604],[-103.47352,20.76059],[-103.47333,20.76243],[-103.46659,20.76231],[-103.46058,20.76191],[-103.46078,20.76006],[-103.45987,20.75998],[-103.45925,20.76008],[-103.45878,20.76202],[-103.45841,20.76176],[-103.45716,20.76162],[-103.45709,20.76303],[-103.45692,20.76325],[-103.45861,20.76354],[-103.45835,20.76484],[-103.45685,20.76471],[-103.45667,20.76653],[-103.45613,20.7666],[-103.45613,20.76751],[-103.4571,20.76749],[-103.45697,20.76939],[-103.45797,20.76944],[-103.45792,20.77035],[-103.45837,20.77053],[-103.46004,20.7718],[-103.46035,20.77197],[-103.46051,20.77089],[-103.46209,20.77104],[-103.46158,20.77457],[-103.45945,20.77309],[-103.45766,20.77103],[-103.45646,20.77143],[-103.45648,20.77626],[-103.45547,20.77615],[-103.4563,20.77676],[-103.45506,20.77788],[-103.45577,20.77862],[-103.45424,20.77984],[-103.45417,20.77942],[-103.4465,20.77971],[-103.44661,20.78033],[-103.44615,20.78077],[-103.44496,20.78058],[-103.44384,20.77996],[-103.44304,20.77996],[-103.4433,20.78145],[-103.44078,20.78193],[-103.44065,20.7825],[-103.44037,20.78276],[-103.43998,20.78297],[-103.4393,20.783],[-103.43909,20.78549],[-103.43658,20.78537],[-103.43719,20.78288],[-103.43639,20.78312],[-103.43557,20.78541],[-103.43507,20.7858],[-103.43431,20.7876],[-103.43383,20.78797],[-103.43711,20.78799],[-103.43726,20.78824],[-103.43814,20.78807],[-103.43952,20.7874],[-103.4405,20.78728],[-103.44022,20.78955],[-103.43956,20.79037],[-103.43967,20.79126],[-103.43869,20.79136],[-103.43744,20.79112],[-103.43453,20.79118],[-103.43297,20.79075],[-103.43225,20.79196],[-103.4317,20.79372],[-103.43053,20.79312],[-103.42921,20.79274],[-103.42916,20.78578]],[[-103.42816,20.78079],[-103.42899,20.78097],[-103.42941,20.78064],[-103.42956,20.78027],[-103.42959,20.77932],[-103.42985,20.77928],[-103.42962,20.77804],[-103.43002,20.77762],[-103.42993,20.77626],[-103.42977,20.77534],[-103.42921,20.77523],[-103.42908,20.77491],[-103.42861,20.7752],[-103.42804,20.77654],[-103.42767,20.77655],[-103.42745,20.7771],[-103.42751,20.7774],[-103.4272,20.77761],[-103.42711,20.77797],[-103.42682,20.77807],[-103.42631,20.77778],[-103.42518,20.77919],[-103.42445,20.7788],[-103.42463,20.77924],[-103.42467,20.78018],[-103.42526,20.78041],[-103.42555,20.78105],[-103.42609,20.78149],[-103.42669,20.78143],[-103.4274,20.78102],[-103.42816,20.78079]]], "type": "Polygon"}, "id": "3", "properties": {"CVEGEO": "141200001", "NOMGEO": "Zapopan", "__folium_color": "#d95f02"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+    geo_json_86ffa96673bccbd73fb9183f47fada8b.bindTooltip(
+    function(layer){
+    let div = L.DomUtil.create('div');
+    
+    let handleObject = feature => {
+        if (feature === null) {
+            return '';
+        } else if (typeof(feature)=='object') {
+            return JSON.stringify(feature);
+        } else {
+            return feature;
+        }
+    }
+    let fields = ["CVEGEO", "NOMGEO"];
+    let aliases = ["CVEGEO", "NOMGEO"];
+    let table = '<table>' +
+        String(
+        fields.map(
+        (v,i)=>
+        `<tr>
+            <th>${aliases[i]}</th>
+            
+            <td>${handleObject(layer.feature.properties[v])}</td>
+        </tr>`).join(''))
+    +'</table>';
+    div.innerHTML=table;
+    
+    return div
+    }
+    ,{
+  "sticky": true,
+  "className": "foliumtooltip",
+});
+                     
+    
+            geo_json_86ffa96673bccbd73fb9183f47fada8b.addTo(map_5af264a0150368ee87a38bff23e5bae6);
+        
+</script>
+</html>
