@@ -36,6 +36,7 @@ nav:
       - Getting Started: getting-started.md
       - Examples: examples.md
       - Datasets: datasets.md
+  - Maps: maps.md
   - Reference: reference.md
   - About:
       - Citation: citation.md
