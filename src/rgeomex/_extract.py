@@ -56,9 +56,11 @@ def find_most_similar_string(s, t, max_dist=float("inf"), ignore_case=True,
     return out[0] if single else out
 
 
-def extract_locality(cve_edo, locality: str | None = None) -> gpd.GeoDataFrame:
-    """Boundary of a locality (INEGI 2019), found by its approximate name.
+def extract_locality(cve_edo, locality: str | list[str] | None = None) -> gpd.GeoDataFrame:
+    """Boundary of one or several localities (INEGI 2019), found by their approximate name.
 
+    ``locality`` is a name or a list of names, e.g.
+    ``["Guadalajara", "Zapopan", "Tonalá", "Tlaquepaque"]``.
     For Mexico City (``cve_edo = "09"``) all its localities are returned.
     """
     edo = state_code(cve_edo)
@@ -67,10 +69,12 @@ def extract_locality(cve_edo, locality: str | None = None) -> gpd.GeoDataFrame:
         return loc
     if locality is None:
         raise ValueError("give the name of the locality")
-    name = find_most_similar_string(locality, loc["NOMGEO"].tolist())
-    if name is None:
-        raise ValueError(f"locality {locality!r} not found in state {edo}")
-    return loc[loc["NOMGEO"] == name].reset_index(drop=True)
+    wanted = [locality] if isinstance(locality, str) else list(locality)
+    names = find_most_similar_string(wanted, loc["NOMGEO"].tolist())
+    missing = [w for w, n in zip(wanted, names) if n is None]
+    if missing:
+        raise ValueError(f"locality not found in state {edo}: {', '.join(map(repr, missing))}")
+    return loc[loc["NOMGEO"].isin(names)].reset_index(drop=True)
 
 
 def _within_locality(layer, cve_edo, locality):
@@ -81,18 +85,18 @@ def _within_locality(layer, cve_edo, locality):
 
 
 def extract_blocks(locality, cve_edo) -> dict:
-    """Blocks (INE 2020) that intersect a locality: ``{"locality", "block"}``."""
+    """Blocks (INE 2020) that intersect one or several localities: ``{"locality", "block"}``."""
     loc, y = _within_locality(blocks, cve_edo, locality)
     return {"locality": loc, "block": y}
 
 
 def extract_ageb(locality, cve_edo) -> dict:
-    """AGEB (INEGI 2019) that intersect a locality: ``{"locality", "ageb"}``."""
+    """AGEB (INEGI 2019) that intersect one or several localities: ``{"locality", "ageb"}``."""
     loc, y = _within_locality(ageb, cve_edo, locality)
     return {"locality": loc, "ageb": y}
 
 
 def extract_sectores(locality, cve_edo) -> dict:
-    """Sections (INE 2020) that intersect a locality: ``{"locality", "sectores"}``."""
+    """Sections (INE 2020) that intersect one or several localities: ``{"locality", "sectores"}``."""
     loc, y = _within_locality(sectors, cve_edo, locality)
     return {"locality": loc, "sectores": y}

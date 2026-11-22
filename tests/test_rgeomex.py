@@ -67,6 +67,13 @@ def test_extract_locality_and_blocks(local_data):
     assert len(cdmx) == 1
 
 
+def test_extract_several_localities(local_data):
+    loc = rgeomex.extract_locality("31", ["Merida", "Ticul"])
+    assert sorted(loc["NOMGEO"]) == ["Mérida", "Ticul"]
+    out = rgeomex.extract_blocks(["Merida", "Ticul"], "31")
+    assert sorted(out["block"]["manzana"]) == [1, 2]
+
+
 def test_datasets():
     d = rgeomex.datasets()
     assert {"blocks_ine20_mx", "AGEE_inegi19_mx"} <= set(d["dataset"])
